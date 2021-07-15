@@ -1,64 +1,67 @@
-import 'package:flutter/material.dart';
+// @dart=2.9
 
-void main() {
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:huawei_contest/presentation/bloc/note_bloc/note_bloc.dart';
+
+import 'bloc_observer.dart';
+import 'dao/note_dao.dart';
+import 'di/di.dart' as di;
+
+Future<void> main() async {
+  await di.init();
+  Bloc.observer = MyBlocObserver();
+
   runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
+    return BlocProvider(
+      create: (BuildContext context) => di.sl<NoteBloc>(),
+      child: MaterialApp(
+        title: 'Flutter Demo',
+        theme: ThemeData(
+          primarySwatch: Colors.blue,
+        ),
+        home: HomePage(),
       ),
-      home: MyHomePage(title: 'Flutter Demo Home Page'),
     );
   }
 }
 
-class MyHomePage extends StatefulWidget {
-  MyHomePage({Key? key, required this.title}) : super(key: key);
-
-  final String title;
-
-  @override
-  _MyHomePageState createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
-
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
-    });
-  }
-
+class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.title),
-      ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Text(
-              'You have pushed the button this many times:',
-            ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headline4,
-            ),
-          ],
+    return BlocProvider(
+      create: (context) => di.sl<NoteBloc>(),
+      child: Scaffold(
+        body: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              // Text('Test'),
+              TextButton.icon(
+                onPressed: () async {
+                  // BlocProvider.of<NoteBloc>(context).add(NoteLoadedEvent());
+
+                  // DatabaseProvider databaseProvider = DatabaseProvider();
+                  NoteDaoImpl daoImpl = NoteDaoImpl();
+
+                  // await daoImpl.addNote(note);
+                  await daoImpl.dbAsses();
+
+                  // var result = await daoImpl.addNote(note);
+
+                  // print(result);
+                },
+                icon: Icon(Icons.touch_app),
+                label: Text('Use Database'),
+              ),
+            ],
+          ),
         ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: Icon(Icons.add),
       ),
     );
   }
