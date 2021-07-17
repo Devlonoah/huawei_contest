@@ -3,14 +3,21 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:huawei_contest/presentation/bloc/note_bloc/note_bloc.dart';
+import 'package:huawei_contest/presentation/features/edit/add_edit.dart';
+import 'package:huawei_contest/presentation/features/read/read.dart';
+import 'package:huawei_contest/theme/colors.dart';
 
 import 'bloc_observer.dart';
-import 'dao/note_dao.dart';
-import 'di/di.dart' as di;
+import 'core/device_size.dart';
+import 'di/injection.dart' as di;
+import 'di/injection.dart';
+import 'presentation/features/home/home.dart';
 
-Future<void> main() async {
-  await di.init();
+void main() {
   Bloc.observer = MyBlocObserver();
+  WidgetsFlutterBinding.ensureInitialized();
+
+  di.init();
 
   runApp(MyApp());
 }
@@ -19,49 +26,33 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (BuildContext context) => di.sl<NoteBloc>(),
+      create: (context) => sl<NoteBloc>(),
       child: MaterialApp(
-        title: 'Flutter Demo',
-        theme: ThemeData(
-          primarySwatch: Colors.blue,
-        ),
-        home: HomePage(),
-      ),
-    );
-  }
-}
-
-class HomePage extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => di.sl<NoteBloc>(),
-      child: Scaffold(
-        body: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              // Text('Test'),
-              TextButton.icon(
-                onPressed: () async {
-                  // BlocProvider.of<NoteBloc>(context).add(NoteLoadedEvent());
-
-                  // DatabaseProvider databaseProvider = DatabaseProvider();
-                  NoteDaoImpl daoImpl = NoteDaoImpl();
-
-                  // await daoImpl.addNote(note);
-                  await daoImpl.dbAsses();
-
-                  // var result = await daoImpl.addNote(note);
-
-                  // print(result);
-                },
-                icon: Icon(Icons.touch_app),
-                label: Text('Use Database'),
-              ),
-            ],
+        title: 'Nothy',
+        debugShowCheckedModeBanner: false,
+        theme: ThemeData.dark().copyWith(
+          primaryColor: Colors.black,
+          backgroundColor: Colors.blueGrey,
+          scaffoldBackgroundColor: qqBlack,
+          textTheme: TextTheme().apply(
+              displayColor: Colors.black,
+              bodyColor: Colors.black,
+              decorationColor: Colors.black),
+          appBarTheme: AppBarTheme(
+              backgroundColor: Colors.black,
+              brightness: Brightness.dark,
+              foregroundColor: Colors.white,
+              iconTheme: IconThemeData(color: Colors.white)),
+          floatingActionButtonTheme: FloatingActionButtonThemeData(
+            backgroundColor: Colors.purple.shade900,
+            foregroundColor: Colors.white,
           ),
         ),
+        home: Home(),
+        routes: {
+          Read.id: (context) => Read(),
+          AddEdit.id: (context) => AddEdit(),
+        },
       ),
     );
   }

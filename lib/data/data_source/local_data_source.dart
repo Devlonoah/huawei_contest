@@ -2,6 +2,7 @@ import 'package:huawei_contest/common/note.dart';
 import 'package:huawei_contest/core/error/exceptions.dart';
 import 'package:huawei_contest/dao/note_dao.dart';
 import 'package:huawei_contest/data/models/note_model.dart';
+// ignore: import_of_legacy_library_into_null_safe
 import 'package:sqflite/sqflite.dart';
 
 abstract class LocalDataSource {
@@ -16,7 +17,7 @@ abstract class LocalDataSource {
   Future<dynamic> deleteEverything();
 }
 
-class LocalDataSourceImpl implements LocalDataSource {
+class LocalDataSourceImpl extends LocalDataSource {
   final NoteDaoImpl noteDaoImpl;
 
   LocalDataSourceImpl(this.noteDaoImpl);

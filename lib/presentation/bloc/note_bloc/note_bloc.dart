@@ -12,10 +12,10 @@ part 'note_event.dart';
 part 'note_state.dart';
 
 class NoteBloc extends Bloc<NoteEvent, NoteState> {
-  NoteBloc(
-    this.fetchAllNoteUsecase,
-    this.addNoteUsecase,
-  ) : super(NoteInitial());
+  NoteBloc({
+    required this.fetchAllNoteUsecase,
+    required this.addNoteUsecase,
+  }) : super(NoteInitial());
 
   final FetchAllNoteUsecase fetchAllNoteUsecase;
   final AddNoteUsecase addNoteUsecase;

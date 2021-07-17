@@ -6,7 +6,7 @@ import 'package:huawei_contest/domain/entity/note_entity.dart';
 import 'package:huawei_contest/domain/repositories/note_repository.dart';
 import 'package:sqflite/sqlite_api.dart';
 
-class NoteRepositoryImpl extends NoteRepository {
+class NoteRepositoryImpl implements NoteRepository {
   final LocalDataSourceImpl localDataSource;
 
   NoteRepositoryImpl(this.localDataSource);

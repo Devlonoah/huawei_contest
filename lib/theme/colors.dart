@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-final Color qqBlue = Color(0xFF4E33FF);
+final Color qqBlue = Color(0x4E33F4);
 final Color qqYellow = Color(0xFFD633);
 
 final Color qqBlack = Color(0xFF469C);
