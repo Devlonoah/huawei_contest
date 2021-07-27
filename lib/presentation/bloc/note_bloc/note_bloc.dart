@@ -2,24 +2,16 @@ import 'dart:async';
 
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:huawei_contest/common/note.dart';
-import 'package:huawei_contest/domain/entity/no_params.dart';
-import 'package:huawei_contest/domain/entity/note_entity.dart';
-import 'package:huawei_contest/domain/usecases/add_note_usecase.dart';
-import 'package:huawei_contest/domain/usecases/fetch_all_notes_usecase.dart';
+import 'package:huawei_contest/data/repositories/note_repositories_impl.dart';
+import 'package:huawei_contest/models/note_model.dart';
 
 part 'note_event.dart';
 part 'note_state.dart';
 
 class NoteBloc extends Bloc<NoteEvent, NoteState> {
-  NoteBloc({
-    required this.fetchAllNoteUsecase,
-    required this.addNoteUsecase,
-  }) : super(NoteInitial());
+  NoteBloc(this.repository) : super(NoteInitial());
 
-  final FetchAllNoteUsecase fetchAllNoteUsecase;
-  final AddNoteUsecase addNoteUsecase;
-
+  final NoteRepository repository;
   @override
   Stream<NoteState> mapEventToState(
     NoteEvent event,
@@ -31,10 +23,56 @@ class NoteBloc extends Bloc<NoteEvent, NoteState> {
     if (event is NoteAddedEvent) {
       yield* _mapNoteAddedEventToState(event);
     }
+
+    if (event is NoteDeletedEvent) {
+      yield* _mapNoteDeletedEventToState(event);
+    }
+
+    if (event is NoteUpdatedEvent) {
+      yield* _mapNoteUpdatedEventToState(event);
+    }
+  }
+
+  Stream<NoteState> _mapNoteUpdatedEventToState(NoteUpdatedEvent event) async* {
+    var oldNotes = (state as NoteLoadingSuccess).notes;
+
+    var updatedNote = oldNotes
+        .map((e) => e.id == event.noteEntity.id ? event.noteEntity : e)
+        .toList();
+
+    yield* _updateDb(event.noteEntity, updatedNote);
+  }
+
+  Stream<NoteState> _updateDb(NoteModel note, List<NoteModel> notes) async* {
+    var result = await repository.updateNote(note);
+
+    yield* result.fold((l) async* {
+      yield NoteLoadingFailure('Databasa palavar');
+    }, (r) async* {
+      yield NoteLoadingSuccess(notes);
+    });
+  }
+
+  Stream<NoteState> _mapNoteDeletedEventToState(NoteDeletedEvent event) async* {
+    if (state is NoteLoadingSuccess) {
+      final updatedNote = (state as NoteLoadingSuccess)
+          .notes
+          .where((note) => note.id != event.noteEntity.id)
+          .toList();
+
+      print(updatedNote.length);
+
+      yield NoteLoadingSuccess(updatedNote);
+      await _deleteFromDb(event.noteEntity);
+    }
+  }
+
+  Future<void> _deleteFromDb(NoteModel note) async {
+    await repository.deleteNote(note);
   }
 
   Stream<NoteState> _mapNoteLoadedEventToState() async* {
-    var result = await fetchAllNoteUsecase.call(NoParams());
+    var result = await repository.fetchAllNote();
 
     yield* result.fold(
       (l) async* {
@@ -43,7 +81,7 @@ class NoteBloc extends Bloc<NoteEvent, NoteState> {
       (r) async* {
         print(r.length);
         if (r.isEmpty) {
-          List<NoteEntity> note = [];
+          List<NoteModel> note = [];
 
           yield NoteLoadingSuccess(note);
         } else {
@@ -62,31 +100,24 @@ class NoteBloc extends Bloc<NoteEvent, NoteState> {
 
   Stream<NoteState> _mapNoteAddedEventToState(NoteAddedEvent event) async* {
     var oldNotes = (state as NoteLoadingSuccess).notes;
+    oldNotes.insert(0, event.note);
+    List<NoteModel> updatedNote = oldNotes;
 
-    List<NoteEntity> updatedNote =
-        (oldNotes.add(event.note)) as List<NoteEntity>;
+    yield* _addNoteToDb(event, updatedNote);
 
-    yield* _addNote(event, updatedNote);
-
-    yield NoteLoadingSuccess(updatedNote);
+    // yield NoteLoadingSuccess(updatedNote);
   }
 
-  _addNote(NoteAddedEvent event, List<NoteEntity> updatedNote) async* {
-    var result = await addNoteUsecase.call(event.note);
-    result.fold((l) async* {
-      yield NoteLoadingFailure(l.message);
-    }, (r) async* {
-      yield NoteLoadingSuccess(updatedNote);
-    });
+  Stream<NoteState> _addNoteToDb(
+      NoteAddedEvent event, List<NoteModel> updatedNote) async* {
+    var result = await repository.addNote(event.note);
+    result.fold(
+      (l) async* {
+        yield NoteLoadingFailure(l.message);
+      },
+      (r) async* {
+        yield NoteLoadingSuccess(updatedNote);
+      },
+    );
   }
-}
-
-NoteEntity noteToEntity(NoteEntity entity) {
-  return NoteEntity(
-    id: entity.id,
-    title: entity.title,
-    note: entity.note,
-    label: entity.label,
-    dateCreated: entity.dateCreated,
-  );
 }

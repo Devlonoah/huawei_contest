@@ -2,12 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:huawei_contest/common/screen_arguments.dart';
 import 'package:huawei_contest/presentation/bloc/note_bloc/note_bloc.dart';
+import 'package:huawei_contest/presentation/features/edit/bloc/bloc/barrel.dart';
 import 'package:huawei_contest/presentation/features/edit/widgets/add_note_widget.dart';
 
 import 'widgets/edit_note_widget.dart';
 
 class AddEdit extends StatelessWidget {
-  final int? noteId;
+  final String? noteId;
 
   static String id = 'AddEdit';
   const AddEdit({
@@ -17,41 +18,56 @@ class AddEdit extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var args = (ModalRoute.of(context)?.settings.arguments) as ScreenArgument;
-    return Scaffold(
-      appBar: AppBar(),
-      body: AddEditBody(noteId: args.noteId, isNewNote: args.isNewNote),
-      backgroundColor: Colors.black,
+    return BlocBuilder<NoteBloc, NoteState>(
+      builder: (context, state) {
+        final isNoteNull = noteId == null;
+        var arg =
+            (ModalRoute.of(context)?.settings.arguments) as ScreenArgument;
+        if (isNoteNull && arg.isNewNote) {
+          return BlocProvider(
+            create: (context) => EditBloc(),
+            child: AddNoteWidget(),
+          );
+        } else {
+          var notex = (state as NoteLoadingSuccess)
+              .notes
+              .firstWhere((note) => arg.noteId == note.id);
+
+          return EditNoteWidget(note: notex);
+        }
+      },
     );
   }
 }
 
-class AddEditBody extends StatelessWidget {
-  final int? noteId;
-  final bool isNewNote;
-  const AddEditBody({Key? key, required this.noteId, required this.isNewNote})
-      : super(key: key);
-  @override
-  Widget build(BuildContext context) {
-    return BlocBuilder<NoteBloc, NoteState>(builder: (context, state) {
-      final isNoteNull = noteId == null;
 
-      if (isNoteNull) {
-        return AddNoteWidget();
-      } else {
-        var notex = (state as NoteLoadingSuccess)
-            .notes
-            .firstWhere((note) => note.id == noteId);
+//TODO: Delete the unused code
+// class AddEditBody extends StatelessWidget {
+//   final int? noteId;
+//   final bool isNewNote;
+//   const AddEditBody({Key? key, required this.noteId, required this.isNewNote})
+//       : super(key: key);
+//   @override
+//   Widget build(BuildContext context) {
+//     return BlocBuilder<NoteBloc, NoteState>(builder: (context, state) {
+//       final isNoteNull = noteId == null;
 
-        return EditNoteWidget(note: notex);
-      }
+//       if (isNoteNull) {
+//         return AddNoteWidget();
+//       } else {
+//         var notex = (state as NoteLoadingSuccess)
+//             .notes
+//             .firstWhere((note) => note.id == noteId);
 
-      // ignore: unnecessary_statements
+//         return EditNoteWidget(note: notex);
+//       }
 
-      // return isNewNote ? AddNoteWidget() : EditNoteWidget(note: notex!);
-    });
-  }
-}
+//       // ignore: unnecessary_statements
+
+//       // return isNewNote ? AddNoteWidget() : EditNoteWidget(note: notex!);
+//     });
+//   }
+// }
 
 
 

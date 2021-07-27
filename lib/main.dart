@@ -3,21 +3,20 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:huawei_contest/presentation/bloc/note_bloc/note_bloc.dart';
+import 'package:huawei_contest/presentation/bloc/theme_bloc/barrel.dart';
 import 'package:huawei_contest/presentation/features/edit/add_edit.dart';
 import 'package:huawei_contest/presentation/features/read/read.dart';
-import 'package:huawei_contest/theme/colors.dart';
 
 import 'bloc_observer.dart';
-import 'core/device_size.dart';
 import 'di/injection.dart' as di;
 import 'di/injection.dart';
 import 'presentation/features/home/home.dart';
 
-void main() {
+Future<void> main() async {
   Bloc.observer = MyBlocObserver();
   WidgetsFlutterBinding.ensureInitialized();
 
-  di.init();
+  await di.init();
 
   runApp(MyApp());
 }
@@ -25,33 +24,27 @@ void main() {
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => sl<NoteBloc>(),
-      child: MaterialApp(
-        title: 'Nothy',
-        debugShowCheckedModeBanner: false,
-        theme: ThemeData.dark().copyWith(
-          primaryColor: Colors.black,
-          backgroundColor: Colors.blueGrey,
-          scaffoldBackgroundColor: qqBlack,
-          textTheme: TextTheme().apply(
-              displayColor: Colors.black,
-              bodyColor: Colors.black,
-              decorationColor: Colors.black),
-          appBarTheme: AppBarTheme(
-              backgroundColor: Colors.black,
-              brightness: Brightness.dark,
-              foregroundColor: Colors.white,
-              iconTheme: IconThemeData(color: Colors.white)),
-          floatingActionButtonTheme: FloatingActionButtonThemeData(
-            backgroundColor: Colors.purple.shade900,
-            foregroundColor: Colors.white,
-          ),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(
+          create: (context) => sl<NoteBloc>(),
         ),
-        home: Home(),
-        routes: {
-          Read.id: (context) => Read(),
-          AddEdit.id: (context) => AddEdit(),
+        BlocProvider(
+            create: (context) =>
+                sl<ThemeBloc>()..add(AppInitializedThemeEvent()))
+      ],
+      child: BlocBuilder<ThemeBloc, ThemeState>(
+        builder: (context, state) {
+          return MaterialApp(
+            title: 'Nothy',
+            debugShowCheckedModeBanner: false,
+            theme: state.themeData,
+            home: Home(),
+            routes: {
+              Read.id: (context) => Read(),
+              AddEdit.id: (context) => AddEdit(),
+            },
+          );
         },
       ),
     );

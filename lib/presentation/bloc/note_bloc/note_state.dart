@@ -12,13 +12,15 @@ class NoteInitial extends NoteState {}
 class NoteLoadInProgress extends NoteState {}
 
 class NoteLoadingSuccess extends NoteState {
-  final List<NoteEntity> notes;
+  final List<NoteModel> notes;
 
   NoteLoadingSuccess(this.notes);
 
   @override
   List<Object> get props => [notes];
 }
+
+class NoteDeletedSuccessful extends NoteState {}
 
 class NoteLoadingFailure extends NoteState {
   final String? errorMessage;

@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:huawei_contest/domain/entity/note_entity.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:huawei_contest/core/device_size.dart';
+import 'package:huawei_contest/models/note_model.dart';
+import 'package:huawei_contest/presentation/bloc/note_bloc/note_bloc.dart';
+import 'package:huawei_contest/presentation/shared_widgets/text_input_widget.dart';
 
 class EditNoteWidget extends StatefulWidget {
-  final NoteEntity note;
+  final NoteModel note;
 
   const EditNoteWidget({Key? key, required this.note}) : super(key: key);
 
@@ -11,29 +15,72 @@ class EditNoteWidget extends StatefulWidget {
 }
 
 class _EditNoteWidgetState extends State<EditNoteWidget> {
-  TextEditingController title = TextEditingController();
-  TextEditingController note = TextEditingController();
-  TextEditingController dateCreated = TextEditingController();
+  TextEditingController titleTextController = TextEditingController();
+  TextEditingController noteTextController = TextEditingController();
+  TextEditingController dateCreatedTextController = TextEditingController();
 
-  TextEditingController label = TextEditingController();
+  TextEditingController labelTextController = TextEditingController();
 
-  TextEditingController id = TextEditingController();
+  TextEditingController idTextController = TextEditingController();
 
   @override
   void initState() {
     super.initState();
 
-    title.text = widget.note.title!;
-    note.text = widget.note.note!;
-    dateCreated.text = widget.note.dateCreated!;
-    label.text = widget.note.label!;
+    titleTextController.text = widget.note.title!;
+    noteTextController.text = widget.note.note!;
+    dateCreatedTextController.text = widget.note.dateCreated!;
+    labelTextController.text = widget.note.label!;
   }
 
   @override
   Widget build(BuildContext context) {
-    return ListView(
+    return Scaffold(
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          final updatedNote = widget.note.copyWith(
+            title: titleTextController.text,
+            note: noteTextController.text,
+          );
 
-        //
-        );
+          BlocProvider.of<NoteBloc>(context)
+            ..add(NoteUpdatedEvent(updatedNote));
+        },
+        child: Icon(Icons.save),
+      ),
+      appBar: AppBar(
+        title: Text(
+          'Edit note',
+          style: Theme.of(context).textTheme.headline6?.copyWith(
+                fontWeight: FontWeight.bold,
+              ),
+        ),
+      ),
+      body: SafeArea(
+        child: Padding(
+          padding: EdgeInsets.symmetric(horizontal: DS.sw * 0.04),
+          child: Column(
+            children: [
+              TextInputWidget(
+                  autoFocus: true,
+                  controller: titleTextController,
+                  hint: 'Add Title',
+                  isTitle: true,
+                  onChanged: (x) {}),
+              SizedBox(height: DS.sh * 0.01),
+              Expanded(
+                child: TextInputWidget(
+                  autoFocus: false,
+                  controller: noteTextController,
+                  hint: 'Add Note here...',
+                  isTitle: false,
+                  onChanged: (x) {},
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
   }
 }

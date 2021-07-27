@@ -32,6 +32,6 @@ class DatabaseProvider {
 
   void initDB(Database database, int version) async {
     await database.execute(
-        'CREATE TABLE $todoTABLE(id INTEGER PRIMARY KEY AUTOINCREMENT, dateCreated TEXT, label TEXT, note TEXT, title TEXT)');
+        'CREATE TABLE $todoTABLE(id TEXT, dateCreated TEXT, label TEXT, note TEXT, title TEXT)');
   }
 }

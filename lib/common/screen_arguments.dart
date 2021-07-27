@@ -1,7 +1,7 @@
 import 'package:equatable/equatable.dart';
 
 class ScreenArgument extends Equatable {
-  final int? noteId;
+  final String? noteId;
   final bool isNewNote;
 
   ScreenArgument({

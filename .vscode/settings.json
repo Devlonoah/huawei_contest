@@ -1,3 +1,4 @@
 {
-    "editor.fontFamily": "Cascadia mono"
+    "editor.fontFamily": "monaco",
+    "editor.fontSize": 13
 }

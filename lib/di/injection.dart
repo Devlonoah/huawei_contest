@@ -2,26 +2,28 @@ import 'package:get_it/get_it.dart';
 import 'package:huawei_contest/dao/note_dao.dart';
 import 'package:huawei_contest/data/data_source/local_data_source.dart';
 import 'package:huawei_contest/data/repositories/note_repositories_impl.dart';
-import 'package:huawei_contest/domain/repositories/note_repository.dart';
-import 'package:huawei_contest/domain/usecases/add_note_usecase.dart';
-import 'package:huawei_contest/domain/usecases/fetch_all_notes_usecase.dart';
+import 'package:huawei_contest/data/repositories/theme_persist_repository.dart';
 import 'package:huawei_contest/presentation/bloc/note_bloc/note_bloc.dart';
+import 'package:huawei_contest/presentation/bloc/theme_bloc/barrel.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 final sl = GetIt.instance;
 
-init() {
+Future<void> init() async {
 //repository
 
-  sl.registerFactory<NoteRepository>(() => NoteRepositoryImpl(sl()));
+  sl.registerLazySingleton<NoteRepository>(() => NoteRepository(sl()));
 
   //Bloc
   sl.registerFactory(
-      () => NoteBloc(addNoteUsecase: sl(), fetchAllNoteUsecase: sl()));
-//UseCases
+    () => NoteBloc(sl()),
+  );
 
-  sl.registerLazySingleton<FetchAllNoteUsecase>(
-      () => FetchAllNoteUsecase(sl()));
-  sl.registerLazySingleton<AddNoteUsecase>(() => AddNoteUsecase(sl()));
+  sl.registerFactory(
+    () => ThemeBloc(sl()),
+  );
+
+  sl.registerLazySingleton(() => ThemePersistRepositoryImpl(sl()));
 
 //data-Source
 
@@ -34,4 +36,7 @@ init() {
 //! External
 // // // Database provider
 // sl.registerLazySingleton(() => DatabaseProvider());
+
+  SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+  sl.registerLazySingleton<SharedPreferences>(() => sharedPreferences);
 }

@@ -1,18 +1,18 @@
-import 'package:huawei_contest/common/note.dart';
 import 'package:huawei_contest/core/error/exceptions.dart';
 import 'package:huawei_contest/dao/note_dao.dart';
-import 'package:huawei_contest/data/models/note_model.dart';
+
 // ignore: import_of_legacy_library_into_null_safe
 import 'package:sqflite/sqflite.dart';
+import 'package:huawei_contest/models/note_model.dart';
 
 abstract class LocalDataSource {
-  Future<dynamic> addNote(Note note);
+  Future<dynamic> addNote(NoteModel note);
 
-  Future<void> updateNote(Note note);
+  Future<void> updateNote(NoteModel note);
 
   Future<List<NoteModel>>? fetchAllNote();
 
-  Future<dynamic> deleteNote(Note note);
+  Future<dynamic> deleteNote(NoteModel note);
 
   Future<dynamic> deleteEverything();
 }
@@ -23,7 +23,7 @@ class LocalDataSourceImpl extends LocalDataSource {
   LocalDataSourceImpl(this.noteDaoImpl);
 
   @override
-  Future<dynamic> addNote(Note note) async {
+  Future<dynamic> addNote(NoteModel note) async {
     try {
       var result = await noteDaoImpl.addNote(note);
       print(result);
@@ -45,13 +45,11 @@ class LocalDataSourceImpl extends LocalDataSource {
   }
 
   @override
-  Future deleteNote(Note note) async {
+  Future deleteNote(NoteModel note) async {
     try {
       var result = await noteDaoImpl.deleteNote(note);
 
       print(result);
-
-      return Future.value();
     } catch (e) {
       throw CustomDatabaseException();
     }
@@ -72,7 +70,7 @@ class LocalDataSourceImpl extends LocalDataSource {
   }
 
   @override
-  Future<void> updateNote(Note note) {
+  Future<void> updateNote(NoteModel note) {
     try {
       var result = noteDaoImpl.updateNote(note);
       print(result);

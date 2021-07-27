@@ -10,7 +10,7 @@ abstract class NoteEvent extends Equatable {
 class NoteLoadedEvent extends NoteEvent {}
 
 class NoteDeletedEvent extends NoteEvent {
-  final NoteEntity noteEntity;
+  final NoteModel noteEntity;
 
   NoteDeletedEvent(this.noteEntity);
   @override
@@ -18,7 +18,7 @@ class NoteDeletedEvent extends NoteEvent {
 }
 
 class NoteAddedEvent extends NoteEvent {
-  final Note note;
+  final NoteModel note;
 
   NoteAddedEvent(this.note);
   @override
@@ -26,7 +26,7 @@ class NoteAddedEvent extends NoteEvent {
 }
 
 class NoteUpdatedEvent extends NoteEvent {
-  final NoteEntity noteEntity;
+  final NoteModel noteEntity;
 
   NoteUpdatedEvent(this.noteEntity);
   @override
@@ -34,7 +34,7 @@ class NoteUpdatedEvent extends NoteEvent {
 }
 
 class NoteDeletedAllEvent extends NoteEvent {
-  final NoteEntity noteEntity;
+  final NoteModel noteEntity;
 
   NoteDeletedAllEvent(this.noteEntity);
   @override

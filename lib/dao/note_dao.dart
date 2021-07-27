@@ -1,23 +1,7 @@
-import 'package:huawei_contest/common/note.dart';
 import 'package:huawei_contest/common/table_details.dart';
 import 'package:huawei_contest/database/database_provuder.dart';
+import 'package:huawei_contest/models/note_model.dart';
 import 'package:sqflite/sqflite.dart';
-
-// abstract class NoteDao {
-// //Create
-//   Future<dynamic> addNote(Note note);
-// //Update
-//   Future<dynamic> updateNote(Note note);
-// //Read
-//   Future<List<Map<String, dynamic>>>? fetchAllNote();
-// //Delete certain note
-//   Future<dynamic> deleteNote(Note note);
-// //Delete All table
-
-//   Future<dynamic> deleteEverything();
-
-//   Future<int?> clearDb();
-// }
 
 final todoTABLE = 'Todo';
 
@@ -27,7 +11,7 @@ class NoteDaoImpl {
   NoteDaoImpl();
 
   //@override
-  Future addNote(Note note) async {
+  Future addNote(NoteModel note) async {
     var db = await dbProvider.database;
     print("checking database status ${db != null}");
     var result = await db?.insert(todoTABLE, note.toMap(),
@@ -43,16 +27,16 @@ class NoteDaoImpl {
   }
 
   //@override
-  Future deleteNote(Note note) async {
+  Future deleteNote(NoteModel note) async {
     var db = await dbProvider.database;
 
-    var result = db?.delete(
+    var result = await db!.delete(
       todoTABLE,
-      where: 'TableDetails.id = ?',
+      where: 'id = ?',
       whereArgs: [note.id],
     );
 
-    print(result);
+    print("Delete result is $result");
   }
 
   //@override
@@ -66,7 +50,7 @@ class NoteDaoImpl {
   }
 
   //@override
-  Future updateNote(Note note) async {
+  Future updateNote(NoteModel note) async {
     var db = await dbProvider.database;
     var result = db?.update(todoTABLE, note.toMap(),
         where: '${TableDetails.id} = ?', whereArgs: [note.id]);

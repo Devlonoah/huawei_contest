@@ -9,6 +9,5 @@ class TableDetails extends Equatable {
   static final String tableName = 'NoteTable';
 
   @override
-  // TODO: implement props
   List<Object?> get props => [id, title, label, note, dateCreated, tableName];
 }

@@ -1,18 +1,16 @@
 import 'package:dartz/dartz.dart';
-import 'package:huawei_contest/common/note.dart';
 import 'package:huawei_contest/core/error/failures.dart';
 import 'package:huawei_contest/data/data_source/local_data_source.dart';
-import 'package:huawei_contest/domain/entity/note_entity.dart';
-import 'package:huawei_contest/domain/repositories/note_repository.dart';
+import 'package:huawei_contest/models/note_model.dart';
+
 import 'package:sqflite/sqlite_api.dart';
 
-class NoteRepositoryImpl implements NoteRepository {
+class NoteRepository {
   final LocalDataSourceImpl localDataSource;
 
-  NoteRepositoryImpl(this.localDataSource);
+  NoteRepository(this.localDataSource);
 
-  @override
-  Future<Either<AppFailure, void>> addNote(Note note) async {
+  Future<Either<AppFailure, void>> addNote(NoteModel note) async {
     try {
       await localDataSource.addNote(note);
 
@@ -22,17 +20,15 @@ class NoteRepositoryImpl implements NoteRepository {
     }
   }
 
-  @override
-  Future<Either<AppFailure, List<NoteEntity>>> fetchAllNote() async {
+  Future<Either<AppFailure, List<NoteModel>>> fetchAllNote() async {
     try {
-      var result = await localDataSource.fetchAllNote();
+      List<NoteModel>? result = await localDataSource.fetchAllNote();
       return Right(result);
     } on DatabaseException {
       return left(DatabaseFailure());
     }
   }
 
-  @override
   Future<Either<AppFailure, void>> deleteNote(note) async {
     try {
       await localDataSource.deleteNote(note);
@@ -42,8 +38,7 @@ class NoteRepositoryImpl implements NoteRepository {
     }
   }
 
-  @override
-  Future<Either<AppFailure, void>> updateNote(Note note) async {
+  Future<Either<AppFailure, void>> updateNote(NoteModel note) async {
     try {
       await localDataSource.updateNote(note);
 

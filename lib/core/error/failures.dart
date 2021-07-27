@@ -22,3 +22,9 @@ class DatabaseFailure extends AppFailure {
   final String? message;
   DatabaseFailure([this.message = _messagex]) : super(_messagex);
 }
+
+class PersistentFailure extends AppFailure {
+  static const String _messagex = 'Error Saving Theme State';
+  final String? message;
+  PersistentFailure([this.message = _messagex]) : super(_messagex);
+}

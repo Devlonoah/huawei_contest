@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:huawei_contest/core/device_size.dart';
+import 'package:huawei_contest/presentation/bloc/theme_bloc/barrel.dart';
 import 'package:huawei_contest/presentation/features/home/widgets/theme_switch.dart';
 
 class HeaderAndThemeSwitch extends StatelessWidget {
@@ -19,9 +21,29 @@ class HeaderAndThemeSwitch extends StatelessWidget {
             style: Theme.of(context)
                 .textTheme
                 .headline5
-                ?.copyWith(color: Colors.white, fontWeight: FontWeight.bold),
+                ?.copyWith(fontWeight: FontWeight.bold),
           ),
-          ThemeSwitch(),
+          BlocBuilder<ThemeBloc, ThemeState>(
+            builder: (context, state) {
+              if (state is ThemeState) {
+                return ThemeSwitch(
+                  value: state.currentValue!,
+                  onChanged: (value) {
+                    BlocProvider.of<ThemeBloc>(context)
+                      ..add(ThemeChangedEvent(value));
+                  },
+                );
+              }
+
+              return ThemeSwitch(
+                value: false,
+                onChanged: (value) {
+                  BlocProvider.of<ThemeBloc>(context)
+                    ..add(ThemeChangedEvent(value));
+                },
+              );
+            },
+          ),
         ],
       ),
     );
