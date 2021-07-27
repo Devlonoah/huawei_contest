@@ -49,7 +49,7 @@ ThemeData lightThemeData() {
 
 ThemeData darkThemeData() {
   return ThemeData.dark().copyWith(
-    primaryColor: Colors.black,
+    primaryColor: Colors.grey[900],
     backgroundColor: Colors.blueGrey,
     scaffoldBackgroundColor: qqBlack,
     cardColor: Colors.black,
@@ -78,3 +78,5 @@ ThemeData darkThemeData() {
     ),
   );
 }
+
+final Color kkDrawerBackGroundColoor = Color(0xFFC6C6D1);

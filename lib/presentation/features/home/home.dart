@@ -6,11 +6,12 @@ import 'package:huawei_contest/core/device_size.dart';
 import 'package:huawei_contest/models/note_model.dart';
 import 'package:huawei_contest/presentation/bloc/note_bloc/note_bloc.dart';
 import 'package:huawei_contest/presentation/features/edit/add_edit.dart';
+import 'package:huawei_contest/presentation/features/home/widgets/drawer_widget.dart';
 import 'package:huawei_contest/presentation/features/home/widgets/search_bar.dart';
 import 'package:huawei_contest/presentation/features/home/widgets/search_delegate.dart';
 import 'package:huawei_contest/presentation/features/read/read.dart';
 
-import 'widgets/header_and_theme_switch.dart';
+import 'widgets/appbar_and_settings_button.dart';
 
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
@@ -30,6 +31,8 @@ class _HomeState extends State<Home> {
   Widget build(BuildContext context) {
     DS.init(context);
     return Scaffold(
+      appBar: appBarAndSettingsButton(context),
+      endDrawer: EndDrawerWidget(),
       backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       body: SafeArea(child: HomeBody()),
       floatingActionButton: FloatingActionButton(
@@ -55,7 +58,6 @@ class HomeBody extends StatelessWidget {
       ),
       child: Column(
         children: [
-          HeaderAndThemeSwitch(),
           SizedBox(height: DS.sh * 0.02),
           BlocBuilder<NoteBloc, NoteState>(
             builder: (context, state) {
@@ -101,16 +103,16 @@ class HomeBody extends StatelessWidget {
                         NoteModel _note = state.notes[x];
 
                         return NoteWidget(
-                            note: _note,
-                            onTap: () {
-                              print("note id @ home screen is ${_note.id}");
-                              Navigator.pushNamed(
-                                context,
-                                Read.id,
-                                arguments: ScreenArgument(
-                                    isNewNote: false, noteId: _note.id),
-                              );
-                            });
+                          note: _note,
+                          onTap: () {
+                            Navigator.pushNamed(
+                              context,
+                              Read.id,
+                              arguments: ScreenArgument(
+                                  isNewNote: false, noteId: _note.id),
+                            );
+                          },
+                        );
                         //             arguments: note.id),);
                       },
                     );
@@ -134,15 +136,6 @@ class HomeBody extends StatelessWidget {
           content: Text('Error loading note'),
         ),
       );
-  }
-}
-
-class LoadingWidget extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Center(
-      child: CircularProgressIndicator(),
-    );
   }
 }
 
@@ -216,5 +209,14 @@ String? addEllipsisToString(String value) {
     return value;
   } else if (_valueLength > 25) {
     return value.substring(0, 25) + '...';
+  }
+}
+
+class LoadingWidget extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+      child: CircularProgressIndicator(),
+    );
   }
 }
