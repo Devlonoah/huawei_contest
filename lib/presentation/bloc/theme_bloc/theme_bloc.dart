@@ -32,8 +32,6 @@ class ThemeBloc extends Bloc<ThemeEvent, ThemeState> {
 
   Future<void> _saveToDisk(bool value) async {
     await themePersistRepositoryImpl.saveThemeState(value);
-
-    print("$value is saved");
   }
 
   Stream<ThemeState> _mapAppInitialized() async* {

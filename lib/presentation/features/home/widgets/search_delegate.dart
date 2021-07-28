@@ -32,7 +32,6 @@ class MySearchDelegate extends SearchDelegate {
   TextStyle? get searchFieldStyle => Theme.of(context).textTheme.headline5;
 
   @override
-  // TODO: implement searchFieldLabel
   String? get searchFieldLabel => 'Search note';
 
   @override
@@ -76,7 +75,7 @@ class MySearchDelegate extends SearchDelegate {
                   );
                 },
                 separatorBuilder: (context, x) {
-                  return Divider(color: Colors.green);
+                  return Divider(color: Colors.white);
                 },
                 itemCount: result.length),
           ),
@@ -130,7 +129,7 @@ class MySearchDelegate extends SearchDelegate {
                 },
                 separatorBuilder: (context, x) {
                   return Divider(
-                    color: Colors.green,
+                    color: Colors.white,
                   );
                 },
                 itemCount: result.length),

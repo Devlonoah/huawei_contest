@@ -193,7 +193,8 @@ class NoteWidget extends StatelessWidget {
                 decoration: BoxDecoration(
                     shape: BoxShape.circle,
                     color: Theme.of(context).primaryColor),
-                child: Icon(Icons.delete),
+                child: Icon(Icons.delete,
+                    color: Theme.of(context).iconTheme.color),
               ),
             ),
           ],

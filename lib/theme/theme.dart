@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:huawei_contest/theme/colors.dart';
-import 'package:huawei_contest/theme/theme.text.dart';
 
 ThemeData lightThemeData() {
   return ThemeData.dark().copyWith(
@@ -24,7 +23,7 @@ ThemeData lightThemeData() {
       caption: TextStyle(color: Colors.black, fontFamily: 'Poppins'),
       overline: TextStyle(color: Colors.black, fontFamily: 'Poppins'),
     ),
-    iconTheme: IconThemeData(color: Colors.grey[900]),
+    iconTheme: IconThemeData(color: Colors.black54),
     appBarTheme: AppBarTheme(
         backgroundColor: Color(0xFFC6C6D1),
         brightness: Brightness.light,
@@ -52,8 +51,8 @@ ThemeData darkThemeData() {
     primaryColor: Colors.grey[900],
     backgroundColor: Colors.blueGrey,
     scaffoldBackgroundColor: qqBlack,
-    cardColor: Colors.black,
-    iconTheme: IconThemeData(color: Colors.grey[400]),
+    cardColor: Colors.blueGrey.shade900,
+    iconTheme: IconThemeData(color: Colors.grey),
     textTheme: TextTheme(
       headline1: TextStyle(color: Colors.white, fontFamily: 'Poppins'),
       headline2: TextStyle(color: Colors.white, fontFamily: 'Poppins'),
@@ -68,7 +67,7 @@ ThemeData darkThemeData() {
       overline: TextStyle(color: Colors.white, fontFamily: 'Poppins'),
     ),
     appBarTheme: AppBarTheme(
-        backgroundColor: Colors.black,
+        backgroundColor: qqBlack,
         brightness: Brightness.dark,
         foregroundColor: Colors.white,
         iconTheme: IconThemeData(color: Colors.white)),
@@ -79,4 +78,4 @@ ThemeData darkThemeData() {
   );
 }
 
-final Color kkDrawerBackGroundColoor = Color(0xFFC6C6D1);
+final Color kkDefaultIconColor = Colors.white;

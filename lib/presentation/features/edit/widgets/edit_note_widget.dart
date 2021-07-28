@@ -45,6 +45,7 @@ class _EditNoteWidgetState extends State<EditNoteWidget> {
 
           BlocProvider.of<NoteBloc>(context)
             ..add(NoteUpdatedEvent(updatedNote));
+          Navigator.pop(context);
         },
         child: Icon(Icons.save),
       ),
@@ -62,11 +63,12 @@ class _EditNoteWidgetState extends State<EditNoteWidget> {
           child: Column(
             children: [
               TextInputWidget(
-                  autoFocus: true,
-                  controller: titleTextController,
-                  hint: 'Add Title',
-                  isTitle: true,
-                  onChanged: (x) {}),
+                autoFocus: true,
+                controller: titleTextController,
+                hint: 'Add Title',
+                isTitle: true,
+                onChanged: (x) {},
+              ),
               SizedBox(height: DS.sh * 0.01),
               Expanded(
                 child: TextInputWidget(

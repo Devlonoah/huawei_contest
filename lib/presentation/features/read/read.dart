@@ -122,7 +122,8 @@ class Body extends StatelessWidget {
                 note.note.toString(),
                 style: Theme.of(context).textTheme.headline6?.copyWith(
                     color: Theme.of(context).textTheme.headline1?.color,
-                    fontFamily: 'Monaco'),
+                    fontFamily: 'Monaco',
+                    letterSpacing: -1.0),
               ),
             ),
           ),
@@ -131,6 +132,3 @@ class Body extends StatelessWidget {
     );
   }
 }
-
-//TODO: Work on the constructor
-
