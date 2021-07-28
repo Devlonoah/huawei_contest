@@ -113,7 +113,6 @@ class HomeBody extends StatelessWidget {
                             );
                           },
                         );
-                                 arguments: note.id),);
                       },
                     );
                   }
