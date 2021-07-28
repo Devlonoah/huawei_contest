@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
-import 'package:huawei_contest/common/screen_arguments.dart';
+import 'package:huawei_contest/models/screen_arguments.dart';
 import 'package:huawei_contest/core/device_size.dart';
 import 'package:huawei_contest/models/note_model.dart';
 import 'package:huawei_contest/presentation/bloc/note_bloc/note_bloc.dart';
@@ -24,7 +24,7 @@ class _HomeState extends State<Home> {
   @override
   void initState() {
     super.initState();
-    BlocProvider.of<NoteBloc>(context)..add(NoteLoadedEvent());
+    context.read().of<NoteBloc>(context)..add(NoteLoadedEvent());
   }
 
   @override
@@ -113,7 +113,7 @@ class HomeBody extends StatelessWidget {
                             );
                           },
                         );
-                        //             arguments: note.id),);
+                                 arguments: note.id),);
                       },
                     );
                   }

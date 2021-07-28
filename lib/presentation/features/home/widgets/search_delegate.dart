@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import 'package:huawei_contest/common/screen_arguments.dart';
+import 'package:huawei_contest/models/screen_arguments.dart';
 import 'package:huawei_contest/core/device_size.dart';
 import 'package:huawei_contest/models/note_model.dart';
 import 'package:huawei_contest/presentation/bloc/note_bloc/note_bloc.dart';
@@ -36,8 +36,6 @@ class MySearchDelegate extends SearchDelegate {
 
   @override
   Widget buildLeading(BuildContext context) {
-    // print(notes.length);
-    print("query is $query");
     return IconButton(
         onPressed: () => close(context, null), icon: Icon(Icons.arrow_back));
   }
@@ -136,16 +134,6 @@ class MySearchDelegate extends SearchDelegate {
           ),
         ],
       );
-      // return ListView(
-      //     children: result
-      //         .map((e) =>
-      //             ListTile(tileColor: Colors.white, title: Text(e.title!)))
-      //         .toList());
     });
-    // return ListView(children: [
-    //   ListTile(
-    //     title: Text(query),
-    //   ),
-    // ]);
   }
 }

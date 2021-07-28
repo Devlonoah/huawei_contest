@@ -3,8 +3,6 @@ import 'package:intl/intl.dart';
 String dateTimeToFormatDate(DateTime date) {
   DateFormat dtFormat = DateFormat('EEE, MMM d, h:mm a');
 
-  // var formattedDate = dtFormat.format(date);
-
   var formattedDate = dtFormat.format(date);
 
   return formattedDate.toString();

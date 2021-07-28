@@ -42,7 +42,6 @@ class EndDrawerWidget extends StatelessWidget {
                       },
                     ),
                   ),
-                  // CustomSpaceContainer(),
                   Spacer(),
                   SettingsWidget(
                       label: 'About App',

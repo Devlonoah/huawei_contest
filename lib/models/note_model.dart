@@ -39,7 +39,7 @@ class NoteModel extends Equatable {
       dateCreated: map['dateCreated'],
     );
   }
-// <=DateTime <=String
+
   String toJson() => json.encode(toMap());
 
   factory NoteModel.fromJson(String source) =>

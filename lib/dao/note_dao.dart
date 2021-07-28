@@ -10,36 +10,28 @@ class NoteDaoImpl {
 
   NoteDaoImpl();
 
-  //@override
   Future addNote(NoteModel note) async {
     var db = await dbProvider.database;
-    print("checking database status ${db != null}");
-    var result = await db?.insert(todoTABLE, note.toMap(),
+
+    await db?.insert(todoTABLE, note.toMap(),
         conflictAlgorithm: ConflictAlgorithm.replace);
-    print(result);
   }
 
-  //@override
   Future deleteEverything() async {
     var db = await dbProvider.database;
-    var result = await db?.delete(todoTABLE);
-    print(result);
+    await db?.delete(todoTABLE);
   }
 
-  //@override
   Future deleteNote(NoteModel note) async {
     var db = await dbProvider.database;
 
-    var result = await db!.delete(
+    await db!.delete(
       todoTABLE,
       where: 'id = ?',
       whereArgs: [note.id],
     );
-
-    print("Delete result is $result");
   }
 
-  //@override
   Future<List<Map<String, dynamic>>>? fetchAllNote() async {
     var db = await dbProvider.database;
     var result = await db!.query(
@@ -49,15 +41,12 @@ class NoteDaoImpl {
     return result;
   }
 
-  //@override
   Future updateNote(NoteModel note) async {
     var db = await dbProvider.database;
-    var result = db?.update(todoTABLE, note.toMap(),
+    db?.update(todoTABLE, note.toMap(),
         where: '${TableDetails.id} = ?', whereArgs: [note.id]);
-    print(result);
   }
 
-  //@override
   Future<int?> clearDb() async {
     var db = await dbProvider.database;
     int? result = await db?.delete(todoTABLE);
@@ -68,7 +57,6 @@ class NoteDaoImpl {
   Future dbAsses() async {
     var db = await dbProvider.database;
 
-    var result = await db?.query(todoTABLE);
-    print('result db access --$result');
+    db?.query(todoTABLE);
   }
 }

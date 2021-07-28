@@ -29,7 +29,7 @@ class _AddNoteWidgetState extends State<AddNoteWidget> {
         onPressed: () {
           if (titleTextController!.text.length > 0 ||
               noteTextController!.text.length > 0) {
-            BlocProvider.of<NoteBloc>(context)
+            context.read()<NoteBloc>(context)
               ..add(
                 NoteAddedEvent(
                   NoteModel(

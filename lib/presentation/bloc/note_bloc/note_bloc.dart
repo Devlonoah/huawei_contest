@@ -60,8 +60,6 @@ class NoteBloc extends Bloc<NoteEvent, NoteState> {
           .where((note) => note.id != event.noteEntity.id)
           .toList();
 
-      print(updatedNote.length);
-
       yield NoteLoadingSuccess(updatedNote);
       await _deleteFromDb(event.noteEntity);
     }
@@ -79,7 +77,6 @@ class NoteBloc extends Bloc<NoteEvent, NoteState> {
         yield NoteLoadingFailure(l.message);
       },
       (r) async* {
-        print(r.length);
         if (r.isEmpty) {
           List<NoteModel> note = [];
 
@@ -91,21 +88,12 @@ class NoteBloc extends Bloc<NoteEvent, NoteState> {
     );
   }
 
-  // Stream<NoteState> _mapNoteDeletedEventToState(NoteDeletedEvent event) async* {
-  //   var oldNotes = (state as NoteLoadingSuccess).notes;
-
-  //   var note = oldNotes.where((e) => e.id != event.noteEntity.id);
-
-  // }
-
   Stream<NoteState> _mapNoteAddedEventToState(NoteAddedEvent event) async* {
     var oldNotes = (state as NoteLoadingSuccess).notes;
     oldNotes.insert(0, event.note);
     List<NoteModel> updatedNote = oldNotes;
 
     yield* _addNoteToDb(event, updatedNote);
-
-    // yield NoteLoadingSuccess(updatedNote);
   }
 
   Stream<NoteState> _addNoteToDb(

@@ -1,37 +1,6 @@
-// import 'package:flutter/material.dart';
-// import 'package:huawei_contest/core/device_size.dart';
-// import 'package:huawei_contest/presentation/widgets/text_input_widget.dart';
-
-// class HeaderInput extends StatelessWidget {
-//   const HeaderInput({
-//     Key? key,
-//   }) : super(key: key);
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return Container(
-//       width: double.infinity,
-//       child: Column(
-//         crossAxisAlignment: CrossAxisAlignment.start,
-//         children: [
-//           TextInputWidget(
-//             hint: 'Add Title',
-//             isTitle: true,
-//             onChanged: (x) {},
-//           ),
-//           SizedBox(height: DS.sh * 0.02),
-//           DateCreated(),
-//         ],
-//       ),
-//     );
-//   }
-// }
-
 import 'package:flutter/material.dart';
 import 'package:huawei_contest/common/date_format.dart';
 import 'package:huawei_contest/core/device_size.dart';
-import 'package:huawei_contest/theme/colors.dart';
-import 'package:intl/intl.dart';
 
 class DateCreated extends StatelessWidget {
   const DateCreated({

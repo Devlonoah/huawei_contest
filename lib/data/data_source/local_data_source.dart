@@ -1,7 +1,6 @@
 import 'package:huawei_contest/core/error/exceptions.dart';
 import 'package:huawei_contest/dao/note_dao.dart';
 
-// ignore: import_of_legacy_library_into_null_safe
 import 'package:sqflite/sqflite.dart';
 import 'package:huawei_contest/models/note_model.dart';
 
@@ -25,8 +24,8 @@ class LocalDataSourceImpl extends LocalDataSource {
   @override
   Future<dynamic> addNote(NoteModel note) async {
     try {
-      var result = await noteDaoImpl.addNote(note);
-      print(result);
+      await noteDaoImpl.addNote(note);
+
       return Future.value();
     } on DatabaseException {
       throw CustomDatabaseException();
@@ -36,8 +35,8 @@ class LocalDataSourceImpl extends LocalDataSource {
   @override
   Future deleteEverything() async {
     try {
-      var result = await noteDaoImpl.deleteEverything();
-      print(result);
+      await noteDaoImpl.deleteEverything();
+
       return Future.value();
     } on DatabaseException {
       throw CustomDatabaseException();
@@ -48,8 +47,6 @@ class LocalDataSourceImpl extends LocalDataSource {
   Future deleteNote(NoteModel note) async {
     try {
       var result = await noteDaoImpl.deleteNote(note);
-
-      print(result);
     } catch (e) {
       throw CustomDatabaseException();
     }
@@ -59,7 +56,7 @@ class LocalDataSourceImpl extends LocalDataSource {
   Future<List<NoteModel>>? fetchAllNote() async {
     try {
       var result = await noteDaoImpl.fetchAllNote();
-      print(result);
+
       List<NoteModel>? notes =
           result?.map((e) => NoteModel.fromMap(e)).toList() ?? [];
 
@@ -70,10 +67,10 @@ class LocalDataSourceImpl extends LocalDataSource {
   }
 
   @override
-  Future<void> updateNote(NoteModel note) {
+  Future<void> updateNote(NoteModel note) async {
     try {
-      var result = noteDaoImpl.updateNote(note);
-      print(result);
+      await noteDaoImpl.updateNote(note);
+
       return Future.value();
     } on DatabaseException {
       throw CustomDatabaseException();

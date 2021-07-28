@@ -34,13 +34,7 @@ class SearchBar extends StatelessWidget {
               Text('Search Note',
                   style: Theme.of(context).textTheme.headline6?.copyWith(
                       color: Colors.grey, fontWeight: FontWeight.w300)),
-            ])
-
-            //  TextField(
-            //   style: Theme.of(context).textTheme.subtitle2,
-            //   decoration: InputDecoration.collapsed(hintText: 'Hint'),
-            // ),
-            ),
+            ])),
       ),
     );
   }

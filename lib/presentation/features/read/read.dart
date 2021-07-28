@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import 'package:huawei_contest/common/screen_arguments.dart';
+import 'package:huawei_contest/models/screen_arguments.dart';
 import 'package:huawei_contest/core/device_size.dart';
 import 'package:huawei_contest/models/note_model.dart';
 import 'package:huawei_contest/presentation/bloc/note_bloc/note_bloc.dart';
@@ -23,12 +23,10 @@ class Read extends StatelessWidget {
         ScreenArgument args =
             (ModalRoute.of(context)!.settings.arguments) as ScreenArgument;
 
-        print('Argument passed is $args');
         final note = (state as NoteLoadingSuccess)
             .notes
             .firstWhere((e) => args.noteId?.trim() == e.id);
 
-        print(note.id);
         return ReadBody(note: note);
       },
     );
