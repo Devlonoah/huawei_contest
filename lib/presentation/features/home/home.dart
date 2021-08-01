@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:huawei_contest/models/screen_arguments.dart';
 import 'package:huawei_contest/core/device_size.dart';
 import 'package:huawei_contest/models/note_model.dart';
@@ -10,7 +9,7 @@ import 'package:huawei_contest/presentation/features/home/widgets/drawer_widget.
 import 'package:huawei_contest/presentation/features/home/widgets/search_bar.dart';
 import 'package:huawei_contest/presentation/features/home/widgets/search_delegate.dart';
 import 'package:huawei_contest/presentation/features/read/read.dart';
-
+import 'package:huawei_contest/common/extension/ellipsis.dart';
 import 'widgets/appbar_and_settings_button.dart';
 
 class Home extends StatefulWidget {
@@ -172,7 +171,8 @@ class NoteWidget extends StatelessWidget {
                             fontSize: 19,
                           )),
                   Text(
-                    addEllipsisToString(note.note!)!,
+                    note.note!.addEllipsis(),
+                    // addEllipsisToString(note.note!)!,
                     style: Theme.of(context).textTheme.bodyText2?.copyWith(
                           fontFamily: 'Poppins',
                           fontWeight: FontWeight.w300,
@@ -200,15 +200,6 @@ class NoteWidget extends StatelessWidget {
         ),
       ),
     );
-  }
-}
-
-String? addEllipsisToString(String value) {
-  int _valueLength = value.length;
-  if (_valueLength < 25) {
-    return value;
-  } else if (_valueLength > 25) {
-    return value.substring(0, 25) + '...';
   }
 }
 
