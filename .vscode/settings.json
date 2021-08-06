@@ -1,0 +1,5 @@
+{
+    "editor.fontFamily": "monaco",
+    "editor.quickSuggestionsDelay": 7,
+    "editor.suggest.preview": true
+}
