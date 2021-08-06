@@ -6,8 +6,7 @@ import 'package:huawei_contest/core/device_size.dart';
 import 'package:huawei_contest/models/note_model.dart';
 import 'package:huawei_contest/presentation/bloc/note_bloc/note_bloc.dart';
 import 'package:huawei_contest/presentation/features/edit/add_edit.dart';
-import 'package:huawei_contest/presentation/shared_widgets/opacity_animating_widget.dart';
-import 'package:huawei_contest/presentation/shared_widgets/sliding_animating_widget.dart';
+import 'package:huawei_contest/presentation/shared_widgets/barrel.dart';
 
 class Read extends StatelessWidget {
   static String id = 'Read';

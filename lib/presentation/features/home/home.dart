@@ -5,9 +5,8 @@ import 'package:huawei_contest/core/device_size.dart';
 import 'package:huawei_contest/models/note_model.dart';
 import 'package:huawei_contest/presentation/bloc/note_bloc/note_bloc.dart';
 import 'package:huawei_contest/presentation/features/edit/add_edit.dart';
-import 'package:huawei_contest/presentation/features/home/widgets/drawer_widget.dart';
-import 'package:huawei_contest/presentation/features/home/widgets/search_bar.dart';
-import 'package:huawei_contest/presentation/features/home/widgets/search_delegate.dart';
+import 'package:huawei_contest/presentation/features/home/widgets/barrel.dart';
+
 import 'package:huawei_contest/presentation/features/read/read.dart';
 import 'package:huawei_contest/common/extension/ellipsis.dart';
 import 'widgets/appbar_and_settings_button.dart';

@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:huawei_contest/models/screen_arguments.dart';
 import 'package:huawei_contest/presentation/bloc/note_bloc/note_bloc.dart';
 import 'package:huawei_contest/presentation/features/edit/bloc/bloc/barrel.dart';
-import 'package:huawei_contest/presentation/features/edit/widgets/add_note_widget.dart';
+import 'package:huawei_contest/presentation/features/edit/widgets/barrel.dart';
 
 import 'widgets/edit_note_widget.dart';
 
