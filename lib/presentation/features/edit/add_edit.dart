@@ -24,7 +24,7 @@ class AddEdit extends StatelessWidget {
         var arg =
             (ModalRoute.of(context)?.settings.arguments) as ScreenArgument;
         if (isNoteNull && arg.isNewNote) {
-          return BlocProvider(
+          return BlocProvider<EditBloc>(
             create: (context) => EditBloc(),
             child: AddNoteWidget(),
           );

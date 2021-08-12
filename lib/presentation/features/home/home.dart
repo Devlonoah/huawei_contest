@@ -12,6 +12,7 @@ import 'package:huawei_contest/common/extension/ellipsis.dart';
 import 'widgets/appbar_and_settings_button.dart';
 
 class Home extends StatefulWidget {
+  static const String id = 'Home';
   const Home({Key? key}) : super(key: key);
 
   @override

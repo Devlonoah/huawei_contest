@@ -7,6 +7,10 @@ import 'package:sqflite/sqflite.dart';
 
 final todoTABLE = 'Todo';
 
+final taskTABLE = 'TASK_TABLE';
+final audioTable = 'AUDIOTABLE';
+final imageTable = 'IMAGE_TABLE';
+
 class DatabaseProvider {
   static final DatabaseProvider dbProvider = DatabaseProvider();
   Database? _database;
@@ -33,5 +37,15 @@ class DatabaseProvider {
   void initDB(Database database, int version) async {
     await database.execute(
         'CREATE TABLE $todoTABLE(id TEXT, dateCreated TEXT, label TEXT, note TEXT, title TEXT)');
+
+//! task table
+    await database
+        .execute('CREATE TABLE $taskTABLE(id TEXT,isCompleted INTEGER)');
+
+    //! IMAGE TABLE
+    await database.execute('CREATE TABLE $imageTable(id TEXT,imagePath TEXT)');
+
+    //! audio table
+    await database.execute('CREATE TABLE $audioTable(id TEXT,audioPath TEXT)');
   }
 }

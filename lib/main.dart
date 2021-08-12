@@ -25,10 +25,10 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
-        BlocProvider(
+        BlocProvider<NoteBloc>(
           create: (context) => sl<NoteBloc>(),
         ),
-        BlocProvider(
+        BlocProvider<ThemeBloc>(
             create: (context) =>
                 sl<ThemeBloc>()..add(AppInitializedThemeEvent()))
       ],
@@ -37,8 +37,9 @@ class MyApp extends StatelessWidget {
           return MaterialApp(
             title: 'Nothy',
             debugShowCheckedModeBanner: false,
-            theme: state.themeData,
-            home: Home(),
+            // theme: state.themeData,
+            // home: Home(),
+            initialRoute: Home.id,
             routes: customRoutes,
           );
         },
