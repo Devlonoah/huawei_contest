@@ -37,8 +37,7 @@ class MyApp extends StatelessWidget {
           return MaterialApp(
             title: 'Nothy',
             debugShowCheckedModeBanner: false,
-            // theme: state.themeData,
-            // home: Home(),
+            theme: state.themeData,
             initialRoute: Home.id,
             routes: customRoutes,
           );

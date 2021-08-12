@@ -23,7 +23,7 @@ class _HomeState extends State<Home> {
   @override
   void initState() {
     super.initState();
-    context.read().of<NoteBloc>(context)..add(NoteLoadedEvent());
+    BlocProvider.of<NoteBloc>(context)..add(NoteLoadedEvent());
   }
 
   @override
@@ -183,9 +183,8 @@ class NoteWidget extends StatelessWidget {
               ),
             ),
             InkWell(
-              onTap: () {
-                context.read<NoteBloc>()..add(NoteDeletedEvent(note));
-              },
+              onTap: () => BlocProvider.of<NoteBloc>(context)
+                ..add(NoteDeletedEvent(note)),
               customBorder: CircleBorder(),
               child: Container(
                 padding: EdgeInsets.all(6.0),
