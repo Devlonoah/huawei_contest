@@ -2,9 +2,10 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:huawei_contest/core/custom_routes.dart';
 import 'package:huawei_contest/presentation/bloc/note_bloc/note_bloc.dart';
 import 'package:huawei_contest/presentation/bloc/theme_bloc/barrel.dart';
-import 'package:huawei_contest/core/custom_routes.dart';
 
 import 'bloc_observer.dart';
 import 'di/injection.dart' as di;
@@ -34,12 +35,14 @@ class MyApp extends StatelessWidget {
       ],
       child: BlocBuilder<ThemeBloc, ThemeState>(
         builder: (context, state) {
-          return MaterialApp(
-            title: 'Nothy',
-            debugShowCheckedModeBanner: false,
-            theme: state.themeData,
-            home: Home(),
-            routes: customRoutes,
+          return ScreenUtilInit(
+            builder: () => MaterialApp(
+              title: 'Nothy',
+              debugShowCheckedModeBanner: false,
+              theme: state.themeData,
+              home: Home(),
+              routes: customRoutes,
+            ),
           );
         },
       ),

@@ -1,7 +1,8 @@
+import 'package:sqflite/sqflite.dart';
+
 import '../common/table_details.dart';
 import '../database/database_provuder.dart';
 import '../models/note_model.dart';
-import 'package:sqflite/sqflite.dart';
 
 final todoTABLE = 'Todo';
 

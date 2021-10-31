@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:bloc/bloc.dart';
+
 import 'barrel.dart';
 
 class EditBloc extends Bloc<EditEvent, EditState> {

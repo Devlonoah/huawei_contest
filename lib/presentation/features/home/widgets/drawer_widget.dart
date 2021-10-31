@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import '../../../../common/spacing.dart';
 import '../../../../core/device_size.dart';
 import '../../../bloc/theme_bloc/barrel.dart';
 import 'theme_switch.dart';
 import '../../../../theme/theme.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class EndDrawerWidget extends StatelessWidget {
   @override
@@ -16,10 +18,11 @@ class EndDrawerWidget extends StatelessWidget {
             Expanded(
               child: Column(
                 children: [
-                  SizedBox(height: DS.sh * 0.03),
-                  _header(context),
+                  addVerticalSpace(
+                    80,
+                  ),
                   SettingsWidget(
-                    label: "Use Dark theme",
+                    label: "Theme",
                     trailing: BlocBuilder<ThemeBloc, ThemeState>(
                       builder: (context, state) {
                         if (state is ThemeState) {
@@ -43,13 +46,6 @@ class EndDrawerWidget extends StatelessWidget {
                     ),
                   ),
                   Spacer(),
-                  SettingsWidget(
-                      label: 'About App',
-                      trailing: IconButton(
-                          icon: Icon(Icons.arrow_forward_ios,
-                              color: kkDefaultIconColor),
-                          onPressed: () {})),
-                  CustomSpaceContainer(),
                 ],
               ),
             ),
@@ -91,7 +87,8 @@ class SettingsWidget extends StatelessWidget {
     return ListTile(
       leading: Text(
         label!,
-        style: Theme.of(context).textTheme.headline6?.copyWith(fontSize: 18.0),
+        style:
+            Theme.of(context).textTheme.headline6?.copyWith(fontSize: 15.0.sp),
       ),
       trailing: trailing ?? SizedBox.shrink(),
     );

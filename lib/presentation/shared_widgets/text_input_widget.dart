@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 // ignore: must_be_immutable
 class TextInputWidget extends StatelessWidget {
@@ -29,13 +30,14 @@ class TextInputWidget extends StatelessWidget {
       cursorColor: Theme.of(context).textSelectionTheme.cursorColor,
       style: TextStyle(
         color: Theme.of(context).textTheme.headline1?.color,
-        fontSize: 15.0,
-        fontFamily: 'Monaco',
+        fontSize: 14.sp,
+        fontWeight: isTitle ? FontWeight.bold : FontWeight.normal,
       ),
       decoration: InputDecoration(
         hintText: hint,
-        hintStyle:
-            TextStyle(color: Theme.of(context).textTheme.headline3?.color),
+        hintStyle: TextStyle(
+            color: Theme.of(context).textTheme.headline1?.color,
+            fontSize: 14.sp),
         border: InputBorder.none,
       ),
     );
