@@ -1,7 +1,7 @@
-import 'package:huawei_contest/presentation/features/edit/add_edit.dart';
-import 'package:huawei_contest/presentation/features/read/read.dart';
+import '../presentation/features/edit/add_edit.dart';
+import '../presentation/features/read/read.dart';
 
-Map<String, dynamic> customRoutes = {
+Object customRoutes = {
   Read.id: (context) => Read(),
   AddEdit.id: (context) => AddEdit(),
 };

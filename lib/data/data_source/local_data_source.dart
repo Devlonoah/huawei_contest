@@ -1,8 +1,8 @@
-import 'package:huawei_contest/core/error/exceptions.dart';
-import 'package:huawei_contest/dao/note_dao.dart';
+import '../../core/error/exceptions.dart';
+import '../../dao/note_dao.dart';
 
 import 'package:sqflite/sqflite.dart';
-import 'package:huawei_contest/models/note_model.dart';
+import '../../models/note_model.dart';
 
 abstract class LocalDataSource {
   Future<dynamic> addNote(NoteModel note);

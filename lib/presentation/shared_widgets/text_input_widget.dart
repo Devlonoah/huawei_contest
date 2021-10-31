@@ -23,13 +23,21 @@ class TextInputWidget extends StatelessWidget {
       autofocus: autoFocus,
       controller: controller,
       onChanged: onChanged,
-      maxLength: isTitle ? 20 : 1000,
+      maxLength: isTitle ? 30 : 1000,
       maxLines: isTitle ? 1 : 1000,
+      cursorWidth: 3,
+      cursorColor: Theme.of(context).textSelectionTheme.cursorColor,
       style: TextStyle(
-          color: Theme.of(context).textTheme.headline1?.color,
-          fontSize: 20.0,
-          fontFamily: 'Monaco'),
-      decoration: InputDecoration(hintText: hint),
+        color: Theme.of(context).textTheme.headline1?.color,
+        fontSize: 15.0,
+        fontFamily: 'Monaco',
+      ),
+      decoration: InputDecoration(
+        hintText: hint,
+        hintStyle:
+            TextStyle(color: Theme.of(context).textTheme.headline3?.color),
+        border: InputBorder.none,
+      ),
     );
   }
 }

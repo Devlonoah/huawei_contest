@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import 'package:huawei_contest/models/screen_arguments.dart';
-import 'package:huawei_contest/core/device_size.dart';
-import 'package:huawei_contest/models/note_model.dart';
-import 'package:huawei_contest/presentation/bloc/note_bloc/note_bloc.dart';
-import 'package:huawei_contest/presentation/features/read/read.dart';
+import '../../../../models/screen_arguments.dart';
+import '../../../../core/device_size.dart';
+import '../../../../models/note_model.dart';
+import '../../../bloc/note_bloc/note_bloc.dart';
+import '../../read/read.dart';
 
 class MySearchDelegate extends SearchDelegate {
   final BuildContext context;
@@ -26,7 +26,10 @@ class MySearchDelegate extends SearchDelegate {
 
   @override
   InputDecorationTheme? get searchFieldDecorationTheme =>
-      Theme.of(context).inputDecorationTheme.copyWith();
+      Theme.of(context).inputDecorationTheme.copyWith(
+          border: InputBorder.none,
+          filled: true,
+          fillColor: Theme.of(context).scaffoldBackgroundColor);
 
   @override
   TextStyle? get searchFieldStyle => Theme.of(context).textTheme.headline5;

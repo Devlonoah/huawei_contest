@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:huawei_contest/common/date_format.dart';
+import '../../../../common/date_format.dart';
 
-import 'package:huawei_contest/core/device_size.dart';
-import 'package:huawei_contest/models/note_model.dart';
-import 'package:huawei_contest/presentation/bloc/note_bloc/note_bloc.dart';
-import 'package:huawei_contest/presentation/features/edit/bloc/bloc/barrel.dart';
-import 'package:huawei_contest/presentation/features/edit/bloc/bloc/edit_bloc.dart';
-import 'package:huawei_contest/presentation/features/edit/widgets/header_input.dart';
-import 'package:huawei_contest/presentation/shared_widgets/text_input_widget.dart';
+import '../../../../core/device_size.dart';
+import '../../../../models/note_model.dart';
+import '../../../bloc/note_bloc/note_bloc.dart';
+import '../bloc/bloc/barrel.dart';
+import '../bloc/bloc/edit_bloc.dart';
+import 'header_input.dart';
+import '../../../shared_widgets/text_input_widget.dart';
 
 class AddNoteWidget extends StatefulWidget {
   @override
@@ -29,7 +29,7 @@ class _AddNoteWidgetState extends State<AddNoteWidget> {
         onPressed: () {
           if (titleTextController!.text.length > 0 ||
               noteTextController!.text.length > 0) {
-            context.read()<NoteBloc>(context)
+            BlocProvider.of<NoteBloc>(context)
               ..add(
                 NoteAddedEvent(
                   NoteModel(
@@ -63,13 +63,9 @@ class _AddNoteWidgetState extends State<AddNoteWidget> {
                     isTitle: true,
                     onChanged: (x) {},
                   ),
-                  SizedBox(height: DS.sh * 0.02),
                   DateCreated(),
                 ],
               ),
-            ),
-            SizedBox(
-              height: DS.sh * 0.02,
             ),
             Expanded(
               child: BlocBuilder<EditBloc, EditState>(

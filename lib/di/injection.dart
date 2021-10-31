@@ -1,10 +1,10 @@
 import 'package:get_it/get_it.dart';
-import 'package:huawei_contest/dao/note_dao.dart';
-import 'package:huawei_contest/data/data_source/local_data_source.dart';
-import 'package:huawei_contest/data/repositories/note_repositories_impl.dart';
-import 'package:huawei_contest/data/repositories/theme_persist_repository.dart';
-import 'package:huawei_contest/presentation/bloc/note_bloc/note_bloc.dart';
-import 'package:huawei_contest/presentation/bloc/theme_bloc/barrel.dart';
+import '../dao/note_dao.dart';
+import '../data/data_source/local_data_source.dart';
+import '../data/repositories/note_repositories_impl.dart';
+import '../data/repositories/theme_persist_repository.dart';
+import '../presentation/bloc/note_bloc/note_bloc.dart';
+import '../presentation/bloc/theme_bloc/barrel.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 final sl = GetIt.instance;

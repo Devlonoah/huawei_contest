@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:huawei_contest/core/device_size.dart';
-import 'package:huawei_contest/presentation/bloc/theme_bloc/barrel.dart';
-import 'package:huawei_contest/presentation/features/home/widgets/theme_switch.dart';
-import 'package:huawei_contest/theme/theme.dart';
+import '../../../../core/device_size.dart';
+import '../../../bloc/theme_bloc/barrel.dart';
+import 'theme_switch.dart';
+import '../../../../theme/theme.dart';
 
 class EndDrawerWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Drawer(
       child: Container(
-        color: Colors.white60,
+        color: Theme.of(context).scaffoldBackgroundColor.withOpacity(0.5),
         child: Column(
           children: [
             Expanded(
@@ -91,8 +91,7 @@ class SettingsWidget extends StatelessWidget {
     return ListTile(
       leading: Text(
         label!,
-        style: Theme.of(context).textTheme.headline6?.copyWith(
-            color: Theme.of(context).primaryColorDark, fontSize: 18.0),
+        style: Theme.of(context).textTheme.headline6?.copyWith(fontSize: 18.0),
       ),
       trailing: trailing ?? SizedBox.shrink(),
     );

@@ -1,9 +1,9 @@
 import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
-import 'package:huawei_contest/data/repositories/theme_persist_repository.dart';
-import 'package:huawei_contest/presentation/bloc/theme_bloc/barrel.dart';
-import 'package:huawei_contest/theme/theme.dart';
+import '../../../data/repositories/theme_persist_repository.dart';
+import 'barrel.dart';
+import '../../../theme/theme.dart';
 
 class ThemeBloc extends Bloc<ThemeEvent, ThemeState> {
   ThemeBloc(this.themePersistRepositoryImpl)

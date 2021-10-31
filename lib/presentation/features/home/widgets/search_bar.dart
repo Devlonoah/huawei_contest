@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:huawei_contest/core/device_size.dart';
+import '../../../../core/device_size.dart';
 
 class SearchBar extends StatelessWidget {
   const SearchBar({
@@ -20,11 +20,8 @@ class SearchBar extends StatelessWidget {
             height: DS.sh * 0.06,
             padding: EdgeInsets.symmetric(horizontal: DS.sw * 0.04),
             decoration: BoxDecoration(
-              border: Border.all(
-                color: Colors.grey,
-              ),
               color: Theme.of(context).primaryColor,
-              borderRadius: BorderRadius.circular(5.0),
+              borderRadius: BorderRadius.circular(15.0),
             ),
             child: Row(children: [
               Icon(Icons.search),

@@ -1,7 +1,7 @@
 import 'dart:async';
 
 import 'package:bloc/bloc.dart';
-import 'package:huawei_contest/presentation/features/edit/bloc/bloc/barrel.dart';
+import 'barrel.dart';
 
 class EditBloc extends Bloc<EditEvent, EditState> {
   EditBloc() : super(EditState(false));
