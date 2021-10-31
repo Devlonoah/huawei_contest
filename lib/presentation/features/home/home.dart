@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:huawei_contest/models/screen_arguments.dart';
-import 'package:huawei_contest/core/device_size.dart';
-import 'package:huawei_contest/models/note_model.dart';
-import 'package:huawei_contest/presentation/bloc/note_bloc/note_bloc.dart';
-import 'package:huawei_contest/presentation/features/edit/add_edit.dart';
-import 'package:huawei_contest/presentation/features/home/widgets/barrel.dart';
+import '../../../models/screen_arguments.dart';
+import '../../../core/device_size.dart';
+import '../../../models/note_model.dart';
+import '../../bloc/note_bloc/note_bloc.dart';
+import '../edit/add_edit.dart';
+import 'widgets/barrel.dart';
 
-import 'package:huawei_contest/presentation/features/read/read.dart';
-import 'package:huawei_contest/common/extension/ellipsis.dart';
+import '../read/read.dart';
+import '../../../common/extension/ellipsis.dart';
 import 'widgets/appbar_and_settings_button.dart';
 
 class Home extends StatefulWidget {
@@ -22,7 +22,7 @@ class _HomeState extends State<Home> {
   @override
   void initState() {
     super.initState();
-    context.read().of<NoteBloc>(context)..add(NoteLoadedEvent());
+    BlocProvider.of<NoteBloc>(context)..add(NoteLoadedEvent());
   }
 
   @override
@@ -63,9 +63,10 @@ class HomeBody extends StatelessWidget {
                   state is NoteLoadingSuccess ? state.notes : [];
               return SearchBar(
                 onTap: () => showSearch(
-                    context: context,
-                    delegate:
-                        MySearchDelegate(context: context, notes: noteState)),
+                  context: context,
+                  delegate:
+                      MySearchDelegate(context: context, notes: noteState),
+                ),
               );
             },
           ),
@@ -151,7 +152,7 @@ class NoteWidget extends StatelessWidget {
             vertical: DS.sh * 0.02, horizontal: DS.sw * 0.03),
         decoration: BoxDecoration(
             color: Theme.of(context).cardColor,
-            borderRadius: BorderRadius.circular(5),
+            borderRadius: BorderRadius.circular(15.0),
             border: Border.all(
               color: Colors.white12,
               width: 1.0,

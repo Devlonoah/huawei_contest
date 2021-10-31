@@ -1,13 +1,18 @@
 import 'package:flutter/material.dart';
-import 'package:huawei_contest/theme/colors.dart';
+import 'colors.dart';
 
+Color? textColor;
 ThemeData lightThemeData() {
+  textColor = Colors.black;
   return ThemeData.dark().copyWith(
-    primaryColor: Colors.grey[400],
-    backgroundColor: Colors.blueGrey,
-    scaffoldBackgroundColor: Colors.white60,
-    cardColor: Color(0xFFC6C6D1),
+    primaryColor: Color(0xFF94a2b2),
+    backgroundColor: Color(0xFF94a2b2),
+    scaffoldBackgroundColor: Color(0xFFebf3fb),
+    cardColor: Color(0xFF94a2b2),
     inputDecorationTheme: InputDecorationTheme(),
+    textSelectionTheme: TextSelectionThemeData(
+      cursorColor: Colors.black,
+    ),
     textTheme: TextTheme(
       headline1: TextStyle(color: Colors.black, fontFamily: 'Poppins'),
       headline2: TextStyle(color: Colors.black, fontFamily: 'Poppins'),
@@ -25,34 +30,36 @@ ThemeData lightThemeData() {
     ),
     iconTheme: IconThemeData(color: Colors.black54),
     appBarTheme: AppBarTheme(
-        backgroundColor: Color(0xFFC6C6D1),
+        backgroundColor: Color(0xFF94a2b2),
         brightness: Brightness.light,
         foregroundColor: Colors.black,
         iconTheme: IconThemeData(color: Colors.black)),
     switchTheme: SwitchThemeData(
       thumbColor: MaterialStateColor.resolveWith(
-        (x) => Colors.red,
+        (x) => Colors.black,
       ),
-      trackColor: MaterialStateColor.resolveWith((x) => Colors.blue),
-      splashRadius: 30.0,
+      trackColor: MaterialStateColor.resolveWith((x) => Colors.black),
+      splashRadius: 15.0,
       overlayColor: MaterialStateColor.resolveWith(
-        (x) => Colors.red,
+        (x) => Colors.grey,
       ),
     ),
     floatingActionButtonTheme: FloatingActionButtonThemeData(
-      backgroundColor: Colors.deepOrangeAccent.shade700,
+      backgroundColor: Colors.amber,
       foregroundColor: Colors.black,
     ),
   );
 }
 
 ThemeData darkThemeData() {
+  textColor = Colors.white;
   return ThemeData.dark().copyWith(
     primaryColor: Colors.grey[900],
     backgroundColor: Colors.blueGrey,
-    scaffoldBackgroundColor: qqBlack,
-    cardColor: Colors.blueGrey.shade900,
+    scaffoldBackgroundColor: Colors.black,
+    cardColor: Colors.grey.shade800,
     iconTheme: IconThemeData(color: Colors.grey),
+    textSelectionTheme: TextSelectionThemeData(cursorColor: Colors.amber),
     textTheme: TextTheme(
       headline1: TextStyle(color: Colors.white, fontFamily: 'Poppins'),
       headline2: TextStyle(color: Colors.white, fontFamily: 'Poppins'),
@@ -71,9 +78,19 @@ ThemeData darkThemeData() {
         brightness: Brightness.dark,
         foregroundColor: Colors.white,
         iconTheme: IconThemeData(color: Colors.white)),
+    switchTheme: SwitchThemeData(
+      thumbColor: MaterialStateColor.resolveWith(
+        (x) => Colors.white,
+      ),
+      trackColor: MaterialStateColor.resolveWith((x) => Colors.white),
+      splashRadius: 15.0,
+      overlayColor: MaterialStateColor.resolveWith(
+        (x) => Colors.white60,
+      ),
+    ),
     floatingActionButtonTheme: FloatingActionButtonThemeData(
-      backgroundColor: Colors.deepOrangeAccent.shade700,
-      foregroundColor: Colors.black,
+      backgroundColor: Colors.amber.shade700,
+      foregroundColor: Colors.white,
     ),
   );
 }

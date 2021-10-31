@@ -1,7 +1,7 @@
 import 'package:dartz/dartz.dart';
-import 'package:huawei_contest/core/error/failures.dart';
-import 'package:huawei_contest/data/data_source/local_data_source.dart';
-import 'package:huawei_contest/models/note_model.dart';
+import '../../core/error/failures.dart';
+import '../data_source/local_data_source.dart';
+import '../../models/note_model.dart';
 
 import 'package:sqflite/sqlite_api.dart';
 

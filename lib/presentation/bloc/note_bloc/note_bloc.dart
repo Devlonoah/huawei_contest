@@ -2,8 +2,8 @@ import 'dart:async';
 
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:huawei_contest/data/repositories/note_repositories_impl.dart';
-import 'package:huawei_contest/models/note_model.dart';
+import '../../../data/repositories/note_repositories_impl.dart';
+import '../../../models/note_model.dart';
 
 part 'note_event.dart';
 part 'note_state.dart';

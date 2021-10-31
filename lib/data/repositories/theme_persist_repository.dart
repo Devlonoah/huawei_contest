@@ -1,6 +1,6 @@
 import 'package:dartz/dartz.dart';
-import 'package:huawei_contest/core/error/exceptions.dart';
-import 'package:huawei_contest/core/error/failures.dart';
+import '../../core/error/exceptions.dart';
+import '../../core/error/failures.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 final String diskKey = 'DISK_KEY';

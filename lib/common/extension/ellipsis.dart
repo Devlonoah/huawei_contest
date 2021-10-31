@@ -1,6 +1,5 @@
-///This add ellipsis to specified String
+///This add ellipsis to String
 
-///Add three dots to specified string
 extension StringExtension on String {
   // ignore: unused_element
   String addEllipsis() =>

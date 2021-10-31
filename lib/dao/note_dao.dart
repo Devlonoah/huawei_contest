@@ -1,6 +1,6 @@
-import 'package:huawei_contest/common/table_details.dart';
-import 'package:huawei_contest/database/database_provuder.dart';
-import 'package:huawei_contest/models/note_model.dart';
+import '../common/table_details.dart';
+import '../database/database_provuder.dart';
+import '../models/note_model.dart';
 import 'package:sqflite/sqflite.dart';
 
 final todoTABLE = 'Todo';

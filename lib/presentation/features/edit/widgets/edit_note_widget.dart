@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:huawei_contest/core/device_size.dart';
-import 'package:huawei_contest/models/note_model.dart';
-import 'package:huawei_contest/presentation/bloc/note_bloc/note_bloc.dart';
-import 'package:huawei_contest/presentation/shared_widgets/text_input_widget.dart';
+import '../../../../core/device_size.dart';
+import '../../../../models/note_model.dart';
+import '../../../bloc/note_bloc/note_bloc.dart';
+import '../../../shared_widgets/text_input_widget.dart';
 
 class EditNoteWidget extends StatefulWidget {
   final NoteModel note;
@@ -49,14 +49,7 @@ class _EditNoteWidgetState extends State<EditNoteWidget> {
         },
         child: Icon(Icons.save),
       ),
-      appBar: AppBar(
-        title: Text(
-          'Edit note',
-          style: Theme.of(context).textTheme.headline6?.copyWith(
-                fontWeight: FontWeight.bold,
-              ),
-        ),
-      ),
+      appBar: AppBar(),
       body: SafeArea(
         child: Padding(
           padding: EdgeInsets.symmetric(horizontal: DS.sw * 0.04),
@@ -69,7 +62,6 @@ class _EditNoteWidgetState extends State<EditNoteWidget> {
                 isTitle: true,
                 onChanged: (x) {},
               ),
-              SizedBox(height: DS.sh * 0.01),
               Expanded(
                 child: TextInputWidget(
                   autoFocus: false,

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:huawei_contest/common/date_format.dart';
-import 'package:huawei_contest/core/device_size.dart';
+import '../../../../common/date_format.dart';
+import '../../../../core/device_size.dart';
 
 class DateCreated extends StatelessWidget {
   const DateCreated({
@@ -14,12 +14,11 @@ class DateCreated extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         Text(dateTimeToFormatDate(DateTime.now()),
-            style: Theme.of(context).textTheme.headline6?.copyWith(
-                  fontWeight: FontWeight.w500,
-                )),
-        SizedBox(
-          width: DS.sw * 0.03,
-        ),
+            style: Theme.of(context)
+                .textTheme
+                .headline6
+                ?.copyWith(fontWeight: FontWeight.w500, fontSize: 15)),
+        SizedBox(width: DS.sw * 0.01),
         Container(
           color: Colors.amber,
           width: DS.sw * 0.009,

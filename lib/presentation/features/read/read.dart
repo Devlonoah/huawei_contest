@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import 'package:huawei_contest/models/screen_arguments.dart';
-import 'package:huawei_contest/core/device_size.dart';
-import 'package:huawei_contest/models/note_model.dart';
-import 'package:huawei_contest/presentation/bloc/note_bloc/note_bloc.dart';
-import 'package:huawei_contest/presentation/features/edit/add_edit.dart';
-import 'package:huawei_contest/presentation/shared_widgets/barrel.dart';
+import '../../../models/screen_arguments.dart';
+import '../../../core/device_size.dart';
+import '../../../models/note_model.dart';
+import '../../bloc/note_bloc/note_bloc.dart';
+import '../edit/add_edit.dart';
+import '../../shared_widgets/barrel.dart';
 
 class Read extends StatelessWidget {
   static String id = 'Read';
@@ -42,24 +42,20 @@ class ReadBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return note == null
-        ? Center(
-            child: Text('No note here'),
-          )
-        : Scaffold(
-            backgroundColor: Theme.of(context).cardColor,
-            appBar: AppBar(),
-            body: Body(note: note),
-            floatingActionButton: FloatingActionButton(
-              tooltip: 'Edit',
-              onPressed: () => Navigator.pushNamed(
-                context,
-                AddEdit.id,
-                arguments: ScreenArgument(isNewNote: false, noteId: note.id),
-              ),
-              child: Icon(Icons.edit),
-            ),
-          );
+    return Scaffold(
+      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+      appBar: AppBar(),
+      body: Body(note: note),
+      floatingActionButton: FloatingActionButton(
+        tooltip: 'Edit',
+        onPressed: () => Navigator.pushNamed(
+          context,
+          AddEdit.id,
+          arguments: ScreenArgument(isNewNote: false, noteId: note.id),
+        ),
+        child: Icon(Icons.edit),
+      ),
+    );
   }
 }
 
@@ -94,7 +90,6 @@ class Body extends StatelessWidget {
               ),
               SizedBox(width: DS.sw * 0.03),
               Container(color: Colors.grey, width: 3.0, height: 25.0),
-              SizedBox(width: DS.sw * 0.03),
               Expanded(
                 child: Container(
                   padding: EdgeInsets.symmetric(
@@ -102,14 +97,15 @@ class Body extends StatelessWidget {
                   decoration: BoxDecoration(
                       color: Theme.of(context).cardColor,
                       borderRadius: BorderRadius.circular(5.0)),
-                  child: Text('${note.note?.length} CHARACTERS ',
-                      maxLines: 2,
-                      style: Theme.of(context)
-                          .textTheme
-                          .bodyText2
-                          ?.copyWith(fontFamily: 'Monaco')),
+                  child: Text(
+                    '${note.note?.length} CHARACTERS ',
+                    maxLines: 2,
+                    style: Theme.of(context).textTheme.bodyText2?.copyWith(
+                          fontFamily: 'Monaco',
+                        ),
+                  ),
                 ),
-              )
+              ),
             ],
           ),
           SizedBox(height: DS.sh * 0.03),
