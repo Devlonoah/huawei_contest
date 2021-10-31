@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../../../models/screen_arguments.dart';
 import '../../../core/device_size.dart';
 import '../../../models/note_model.dart';
+import '../../../models/screen_arguments.dart';
 import '../../bloc/note_bloc/note_bloc.dart';
-import '../edit/add_edit.dart';
 import '../../shared_widgets/barrel.dart';
+import '../edit/add_edit.dart';
 
 class Read extends StatelessWidget {
   static String id = 'Read';
@@ -75,7 +76,7 @@ class Body extends StatelessWidget {
                 style: Theme.of(context)
                     .textTheme
                     .headline4
-                    ?.copyWith(fontWeight: FontWeight.bold)),
+                    ?.copyWith(fontWeight: FontWeight.bold, fontSize: 20.sp)),
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.start,
@@ -85,7 +86,7 @@ class Body extends StatelessWidget {
                 note.dateCreated.toString(),
                 style: Theme.of(context).textTheme.headline6?.copyWith(
                     fontWeight: FontWeight.w700,
-                    fontSize: 15.0,
+                    fontSize: 11.sp,
                     color: Colors.grey),
               ),
               SizedBox(width: DS.sw * 0.03),
@@ -94,14 +95,13 @@ class Body extends StatelessWidget {
                 child: Container(
                   padding: EdgeInsets.symmetric(
                       horizontal: DS.sw * 0.02, vertical: DS.sh * 0.007),
-                  decoration: BoxDecoration(
-                      color: Theme.of(context).cardColor,
-                      borderRadius: BorderRadius.circular(5.0)),
+                  decoration:
+                      BoxDecoration(borderRadius: BorderRadius.circular(5.0)),
                   child: Text(
                     '${note.note?.length} CHARACTERS ',
                     maxLines: 2,
                     style: Theme.of(context).textTheme.bodyText2?.copyWith(
-                          fontFamily: 'Monaco',
+                          fontSize: 11.sp,
                         ),
                   ),
                 ),
@@ -115,7 +115,7 @@ class Body extends StatelessWidget {
                 note.note.toString(),
                 style: Theme.of(context).textTheme.headline6?.copyWith(
                     color: Theme.of(context).textTheme.headline1?.color,
-                    fontFamily: 'Monaco',
+                    fontSize: 14.sp,
                     letterSpacing: -1.0),
               ),
             ),

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
 import '../../../../core/device_size.dart';
 import '../../../../models/note_model.dart';
 import '../../../bloc/note_bloc/note_bloc.dart';

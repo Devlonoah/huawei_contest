@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../../../../models/screen_arguments.dart';
 import '../../../../core/device_size.dart';
 import '../../../../models/note_model.dart';
+import '../../../../models/screen_arguments.dart';
 import '../../../bloc/note_bloc/note_bloc.dart';
 import '../../read/read.dart';
 
@@ -32,7 +33,8 @@ class MySearchDelegate extends SearchDelegate {
           fillColor: Theme.of(context).scaffoldBackgroundColor);
 
   @override
-  TextStyle? get searchFieldStyle => Theme.of(context).textTheme.headline5;
+  TextStyle? get searchFieldStyle =>
+      Theme.of(context).textTheme.headline5?.copyWith(fontSize: 15.sp);
 
   @override
   String? get searchFieldLabel => 'Search note';

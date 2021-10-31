@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import '../../../common/spacing.dart';
 import '../../../models/screen_arguments.dart';
 import '../../../core/device_size.dart';
 import '../../../models/note_model.dart';
@@ -56,21 +59,22 @@ class HomeBody extends StatelessWidget {
       ),
       child: Column(
         children: [
-          SizedBox(height: DS.sh * 0.02),
-          BlocBuilder<NoteBloc, NoteState>(
-            builder: (context, state) {
-              final List<NoteModel> noteState =
-                  state is NoteLoadingSuccess ? state.notes : [];
-              return SearchBar(
-                onTap: () => showSearch(
-                  context: context,
-                  delegate:
-                      MySearchDelegate(context: context, notes: noteState),
-                ),
-              );
-            },
-          ),
-          SizedBox(height: DS.sh * 0.03),
+          // SizedBox(height: DS.sh * 0.02),
+          // BlocBuilder<NoteBloc, NoteState>(
+          //   builder: (context, state) {
+          //     final List<NoteModel> noteState =
+          //         state is NoteLoadingSuccess ? state.notes : [];
+          //     return SearchBar(
+          //       onTap: () => showSearch(
+          //         context: context,
+          //         delegate:
+          //             MySearchDelegate(context: context, notes: noteState),
+          //       ),
+          //     );
+          //   },
+          // ),
+          // SizedBox(height: DS.sh * 0.03),
+          addVerticalSpace(10),
           Expanded(
             child: BlocConsumer<NoteBloc, NoteState>(
               listener: (context, state) {
@@ -101,16 +105,21 @@ class HomeBody extends StatelessWidget {
                       itemBuilder: (context, x) {
                         NoteModel _note = state.notes[x];
 
-                        return NoteWidget(
-                          note: _note,
-                          onTap: () {
-                            Navigator.pushNamed(
-                              context,
-                              Read.id,
-                              arguments: ScreenArgument(
-                                  isNewNote: false, noteId: _note.id),
-                            );
-                          },
+                        return Dismissible(
+                          onDismissed: (x) => context.read<NoteBloc>()
+                            ..add(NoteDeletedEvent(_note)),
+                          key: Key(_note.hashCode.toString()),
+                          child: NoteWidget(
+                            note: _note,
+                            onTap: () {
+                              Navigator.pushNamed(
+                                context,
+                                Read.id,
+                                arguments: ScreenArgument(
+                                    isNewNote: false, noteId: _note.id),
+                              );
+                            },
+                          ),
                         );
                       },
                     );
@@ -151,12 +160,9 @@ class NoteWidget extends StatelessWidget {
         padding: EdgeInsets.symmetric(
             vertical: DS.sh * 0.02, horizontal: DS.sw * 0.03),
         decoration: BoxDecoration(
-            color: Theme.of(context).cardColor,
-            borderRadius: BorderRadius.circular(15.0),
-            border: Border.all(
-              color: Colors.white12,
-              width: 1.0,
-            )),
+          color: Theme.of(context).cardColor,
+          borderRadius: BorderRadius.circular(15.0),
+        ),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
@@ -167,33 +173,39 @@ class NoteWidget extends StatelessWidget {
                 children: [
                   Text(note.title.toString(),
                       style: Theme.of(context).textTheme.headline5?.copyWith(
-                            fontFamily: 'Monaco',
-                            fontSize: 19,
-                          )),
+                          fontSize: 14.sp, fontWeight: FontWeight.bold)),
                   Text(
                     note.note!.addEllipsis(),
-                    // addEllipsisToString(note.note!)!,
+                    maxLines: 1,
                     style: Theme.of(context).textTheme.bodyText2?.copyWith(
                           fontFamily: 'Poppins',
-                          fontWeight: FontWeight.w300,
-                          fontSize: 18,
+                          fontWeight: FontWeight.w400,
+                          fontSize: 14.sp,
                         ),
                   ),
                 ],
               ),
             ),
-            InkWell(
-              onTap: () {
-                context.read<NoteBloc>()..add(NoteDeletedEvent(note));
-              },
-              customBorder: CircleBorder(),
-              child: Container(
-                padding: EdgeInsets.all(6.0),
-                decoration: BoxDecoration(
-                    shape: BoxShape.circle,
-                    color: Theme.of(context).primaryColor),
-                child: Icon(Icons.delete,
-                    color: Theme.of(context).iconTheme.color),
+            ClipRRect(
+              borderRadius: BorderRadius.circular(100),
+              child: Material(
+                child: InkWell(
+                  onTap: () => _navigateToEditPage(context, note.id),
+                  customBorder: CircleBorder(),
+                  child: Container(
+                    padding: EdgeInsets.all(10.0.r),
+                    decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                    ),
+                    child: Icon(
+                      // Icons.delete,
+                      FontAwesomeIcons.pen,
+                      size: 12.r,
+                      color: Colors.white,
+                      // color: Theme.of(context).iconTheme.color,
+                    ),
+                  ),
+                ),
               ),
             ),
           ],
@@ -207,7 +219,12 @@ class LoadingWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Center(
-      child: CircularProgressIndicator(),
+      child: CircularProgressIndicator(color: Colors.amber, strokeWidth: 10.r),
     );
   }
+}
+
+void _navigateToEditPage(BuildContext context, String? noteId) {
+  Navigator.pushNamed(context, AddEdit.id,
+      arguments: ScreenArgument(isNewNote: false, noteId: noteId));
 }

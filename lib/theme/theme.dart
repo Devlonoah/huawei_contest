@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'colors.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 Color? textColor;
 ThemeData lightThemeData() {
@@ -8,7 +9,7 @@ ThemeData lightThemeData() {
     primaryColor: Color(0xFF94a2b2),
     backgroundColor: Color(0xFF94a2b2),
     scaffoldBackgroundColor: Color(0xFFebf3fb),
-    cardColor: Color(0xFF94a2b2),
+    cardColor: Colors.white,
     inputDecorationTheme: InputDecorationTheme(),
     textSelectionTheme: TextSelectionThemeData(
       cursorColor: Colors.black,
@@ -75,7 +76,6 @@ ThemeData darkThemeData() {
     ),
     appBarTheme: AppBarTheme(
         backgroundColor: qqBlack,
-        brightness: Brightness.dark,
         foregroundColor: Colors.white,
         iconTheme: IconThemeData(color: Colors.white)),
     switchTheme: SwitchThemeData(

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../../core/device_size.dart';
 
 class SearchBar extends StatelessWidget {
@@ -21,7 +22,7 @@ class SearchBar extends StatelessWidget {
             padding: EdgeInsets.symmetric(horizontal: DS.sw * 0.04),
             decoration: BoxDecoration(
               color: Theme.of(context).primaryColor,
-              borderRadius: BorderRadius.circular(15.0),
+              borderRadius: BorderRadius.circular(15.0.r),
             ),
             child: Row(children: [
               Icon(Icons.search),
@@ -30,7 +31,9 @@ class SearchBar extends StatelessWidget {
               ),
               Text('Search Note',
                   style: Theme.of(context).textTheme.headline6?.copyWith(
-                      color: Colors.grey, fontWeight: FontWeight.w300)),
+                      color: Colors.grey,
+                      fontWeight: FontWeight.w300,
+                      fontSize: 12.sp)),
             ])),
       ),
     );

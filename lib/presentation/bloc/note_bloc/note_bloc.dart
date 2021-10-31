@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
+
 import '../../../data/repositories/note_repositories_impl.dart';
 import '../../../models/note_model.dart';
 
