@@ -27,6 +27,7 @@ class _AddNoteWidgetState extends State<AddNoteWidget> {
       appBar: AppBar(),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
+          print(titleTextController!.text.length > 0);
           if (titleTextController!.text.length > 0 ||
               noteTextController!.text.length > 0) {
             BlocProvider.of<NoteBloc>(context)

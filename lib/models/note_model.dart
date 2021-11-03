@@ -32,7 +32,7 @@ class NoteModel extends Equatable {
 
   factory NoteModel.fromMap(Map<String, dynamic> map) {
     return NoteModel(
-      id: map['id']?.toString() ?? '',
+      id: map['id']?.toString() ?? null,
       title: map['title'] ?? '',
       note: map['note'] ?? '',
       label: map['label'] ?? '',

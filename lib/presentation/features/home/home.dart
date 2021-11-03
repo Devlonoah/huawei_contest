@@ -158,25 +158,31 @@ class NoteWidget extends StatelessWidget {
       child: Container(
         alignment: Alignment.centerLeft,
         padding: EdgeInsets.symmetric(
-            vertical: DS.sh * 0.02, horizontal: DS.sw * 0.03),
+            vertical: DS.sh * 0.03, horizontal: DS.sw * 0.03),
         decoration: BoxDecoration(
           color: Theme.of(context).cardColor,
           borderRadius: BorderRadius.circular(15.0),
         ),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Expanded(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(note.title.toString(),
-                      style: Theme.of(context).textTheme.headline5?.copyWith(
-                          fontSize: 14.sp, fontWeight: FontWeight.bold)),
+                  note.title?.length != 0
+                      ? Text(note.title.toString(),
+                          style: Theme.of(context)
+                              .textTheme
+                              .headline5
+                              ?.copyWith(
+                                  fontSize: 14.sp, fontWeight: FontWeight.bold))
+                      : SizedBox.shrink(),
                   Text(
-                    note.note!.addEllipsis(),
-                    maxLines: 1,
+                    note.note!,
+                    maxLines: 3,
                     style: Theme.of(context).textTheme.bodyText2?.copyWith(
                           fontFamily: 'Poppins',
                           fontWeight: FontWeight.w400,
