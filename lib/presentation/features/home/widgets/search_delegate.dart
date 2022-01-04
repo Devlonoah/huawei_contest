@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:huawei_contest/presentation/shared_widgets/bouncy_page_route.dart';
 
 import '../../../../core/device_size.dart';
 import '../../../../models/note_model.dart';
@@ -67,15 +68,15 @@ class MySearchDelegate extends SearchDelegate {
                 itemBuilder: (context, index) {
                   final currentNote = result[index];
                   return ListTile(
-                    tileColor: Theme.of(context).cardColor,
-                    title: Text(currentNote.title!),
-                    onTap: () => Navigator.pushNamed(
-                      context,
-                      Read.id,
-                      arguments: ScreenArgument(
-                          isNewNote: false, noteId: currentNote.id),
-                    ),
-                  );
+                      tileColor: Theme.of(context).cardColor,
+                      title: Text(currentNote.title!),
+                      onTap: () => Navigator.push(
+                          context,
+                          BouncyPageRoute(
+                            widget: Read(),
+                            arguments: ScreenArgument(
+                                isNewNote: false, noteId: currentNote.id),
+                          )));
                 },
                 separatorBuilder: (context, x) {
                   return Divider(color: Colors.white);

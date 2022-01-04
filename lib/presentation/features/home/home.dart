@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:huawei_contest/presentation/shared_widgets/bouncy_page_route.dart';
 import '../../../common/spacing.dart';
 import '../../../models/screen_arguments.dart';
 import '../../../core/device_size.dart';
@@ -231,6 +232,11 @@ class LoadingWidget extends StatelessWidget {
 }
 
 void _navigateToEditPage(BuildContext context, String? noteId) {
-  Navigator.pushNamed(context, AddEdit.id,
-      arguments: ScreenArgument(isNewNote: false, noteId: noteId));
+  Navigator.push(
+    context,
+    BouncyPageRoute(
+      widget: AddEdit(),
+      arguments: ScreenArgument(isNewNote: false, noteId: noteId),
+    ),
+  );
 }
