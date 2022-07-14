@@ -6,9 +6,9 @@ Color? textColor;
 ThemeData lightThemeData() {
   textColor = Colors.black;
   return ThemeData.dark().copyWith(
-    primaryColor: Color(0xFF94a2b2),
-    backgroundColor: Color(0xFF94a2b2),
-    scaffoldBackgroundColor: Color(0xFFebf3fb),
+    primaryColor: Color.fromARGB(255, 255, 255, 255),
+    backgroundColor: Color.fromARGB(255, 182, 184, 186),
+    scaffoldBackgroundColor: Color.fromARGB(255, 248, 248, 248),
     cardColor: Colors.white,
     inputDecorationTheme: InputDecorationTheme(),
     textSelectionTheme: TextSelectionThemeData(
@@ -31,8 +31,9 @@ ThemeData lightThemeData() {
     ),
     iconTheme: IconThemeData(color: Colors.black54),
     appBarTheme: AppBarTheme(
-        backgroundColor: Color(0xFF94a2b2),
+        backgroundColor: Color.fromARGB(255, 248, 248, 248),
         brightness: Brightness.light,
+        elevation: 0.0,
         foregroundColor: Colors.black,
         iconTheme: IconThemeData(color: Colors.black)),
     switchTheme: SwitchThemeData(

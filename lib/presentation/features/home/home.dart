@@ -12,7 +12,6 @@ import 'widgets/barrel.dart';
 
 import '../read/read.dart';
 import '../../../common/extension/ellipsis.dart';
-import 'widgets/appbar_and_settings_button.dart';
 
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
@@ -28,11 +27,18 @@ class _HomeState extends State<Home> {
     BlocProvider.of<NoteBloc>(context)..add(NoteLoadedEvent());
   }
 
+  GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
   @override
   Widget build(BuildContext context) {
     DS.init(context);
     return Scaffold(
-      appBar: appBarAndSettingsButton(context),
+      key: scaffoldKey,
+      appBar: appBarAndSettingsButton(
+        context,
+        onPressed: () {
+          scaffoldKey.currentState!.openEndDrawer();
+        },
+      ),
       endDrawer: EndDrawerWidget(),
       backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       body: SafeArea(child: HomeBody()),
@@ -98,7 +104,7 @@ class HomeBody extends StatelessWidget {
                       physics: BouncingScrollPhysics(),
                       separatorBuilder: (context, x) {
                         return Divider(
-                          color: Colors.white54,
+                          color: Colors.transparent,
                         );
                       },
                       itemCount: state.notes.length,
@@ -173,15 +179,15 @@ class NoteWidget extends StatelessWidget {
                 children: [
                   Text(note.title.toString(),
                       style: Theme.of(context).textTheme.headline5?.copyWith(
-                          fontSize: 14.sp, fontWeight: FontWeight.bold)),
+                          fontSize: 16, fontWeight: FontWeight.w600)),
                   Text(
                     note.note!.addEllipsis(),
                     maxLines: 1,
                     style: Theme.of(context).textTheme.bodyText2?.copyWith(
-                          fontFamily: 'Poppins',
-                          fontWeight: FontWeight.w400,
-                          fontSize: 14.sp,
-                        ),
+                        fontFamily: 'Poppins',
+                        fontWeight: FontWeight.w400,
+                        fontSize: 14,
+                        color: Colors.grey),
                   ),
                 ],
               ),
@@ -193,14 +199,14 @@ class NoteWidget extends StatelessWidget {
                   onTap: () => _navigateToEditPage(context, note.id),
                   customBorder: CircleBorder(),
                   child: Container(
-                    padding: EdgeInsets.all(10.0.r),
+                    padding: EdgeInsets.all(10.0),
                     decoration: BoxDecoration(
                       shape: BoxShape.circle,
                     ),
                     child: Icon(
                       // Icons.delete,
                       FontAwesomeIcons.pen,
-                      size: 12.r,
+                      size: 10,
                       color: Colors.white,
                       // color: Theme.of(context).iconTheme.color,
                     ),
