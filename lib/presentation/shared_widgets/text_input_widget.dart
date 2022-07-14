@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:huawei_contest/theme/colors.dart';
 
 // ignore: must_be_immutable
 class TextInputWidget extends StatelessWidget {
@@ -21,23 +23,25 @@ class TextInputWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextField(
+      scrollPhysics: NeverScrollableScrollPhysics(),
       autofocus: autoFocus,
       controller: controller,
       onChanged: onChanged,
-      maxLength: isTitle ? 30 : 1000,
-      maxLines: isTitle ? 1 : 1000,
+      maxLength: 10000,
+      maxLengthEnforcement: MaxLengthEnforcement.enforced,
       cursorWidth: 3,
       cursorColor: Theme.of(context).textSelectionTheme.cursorColor,
       style: TextStyle(
         color: Theme.of(context).textTheme.headline1?.color,
-        fontSize: 14.sp,
-        fontWeight: isTitle ? FontWeight.bold : FontWeight.normal,
+        fontSize: isTitle ? 14 : 16,
+        fontWeight: FontWeight.normal,
       ),
       decoration: InputDecoration(
+        isDense: isTitle ? false : true,
         hintText: hint,
+        counter: SizedBox.shrink(),
         hintStyle: TextStyle(
-            color: Theme.of(context).textTheme.headline1?.color,
-            fontSize: 14.sp),
+            color: qqGrey.withOpacity(0.5), fontSize: isTitle ? 14 : 16),
         border: InputBorder.none,
       ),
     );

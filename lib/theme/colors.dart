@@ -8,3 +8,4 @@ final Color qqBlack = Color(0xFF469C);
 final Color qqWhite = Color(0xFFFFFF);
 
 final Color qqCardColor = Color(0xFF272E40);
+Color qqGrey = Colors.grey.shade500;

@@ -4,17 +4,17 @@ PreferredSizeWidget appBarAndSettingsButton(BuildContext context,
     {void Function()? onPressed}) {
   return AppBar(
     title: Text(
-      '',
+      'Notty',
       style: Theme.of(context)
           .textTheme
-          .headline5
-          ?.copyWith(fontWeight: FontWeight.bold),
+          .headline6
+          ?.copyWith(fontWeight: FontWeight.w100),
     ),
-    actions: [
-      IconButton(
-        onPressed: onPressed,
-        icon: Icon(Icons.settings_outlined),
-      ),
-    ],
+    // actions: [
+    //   // IconButton(
+    //   //   onPressed: onPressed,
+    //   //   icon: Icon(Icons.settings_outlined),
+    //   // ),
+    // ],
   );
 }

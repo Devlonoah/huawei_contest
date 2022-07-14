@@ -14,15 +14,12 @@ class DateCreated extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         Text(dateTimeToFormatDate(DateTime.now()),
-            style: Theme.of(context)
-                .textTheme
-                .headline6
-                ?.copyWith(fontWeight: FontWeight.w500, fontSize: 15)),
-        SizedBox(width: DS.sw * 0.01),
+            style: TextStyle(fontSize: 12, color: Colors.grey.shade500)),
+        SizedBox(width: 10),
         Container(
           color: Colors.amber,
-          width: DS.sw * 0.009,
-          height: 25.0,
+          width: 4,
+          height: 14.0,
         ),
       ],
     );

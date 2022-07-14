@@ -7,6 +7,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:huawei_contest/core/custom_routes.dart';
 import 'package:huawei_contest/presentation/bloc/note_bloc/note_bloc.dart';
 import 'package:huawei_contest/presentation/bloc/theme_bloc/barrel.dart';
+import 'package:huawei_contest/theme/theme.dart';
 
 import 'bloc_observer.dart';
 import 'di/injection.dart' as di;
@@ -43,7 +44,8 @@ class MyApp extends StatelessWidget {
             builder: () => MaterialApp(
               title: 'Nothy',
               debugShowCheckedModeBanner: false,
-              theme: state.themeData,
+              theme: lightThemeData(),
+              darkTheme: darkThemeData(),
               home: Home(),
               routes: customRoutes,
             ),

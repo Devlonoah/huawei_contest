@@ -5,8 +5,6 @@ import '../../bloc/note_bloc/note_bloc.dart';
 import 'bloc/bloc/barrel.dart';
 import 'widgets/barrel.dart';
 
-import 'widgets/edit_note_widget.dart';
-
 class AddEdit extends StatelessWidget {
   final String? noteId;
 

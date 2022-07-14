@@ -59,7 +59,7 @@ ThemeData darkThemeData() {
     primaryColor: Colors.grey[900],
     backgroundColor: Colors.blueGrey,
     scaffoldBackgroundColor: Colors.black,
-    cardColor: Colors.grey.shade800,
+    cardColor: Color.fromARGB(255, 49, 48, 48),
     iconTheme: IconThemeData(color: Colors.grey),
     textSelectionTheme: TextSelectionThemeData(cursorColor: Colors.amber),
     textTheme: TextTheme(

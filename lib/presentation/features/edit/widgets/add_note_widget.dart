@@ -24,33 +24,39 @@ class _AddNoteWidgetState extends State<AddNoteWidget> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Theme.of(context).scaffoldBackgroundColor,
-      appBar: AppBar(),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          if (titleTextController!.text.length > 0 ||
-              noteTextController!.text.length > 0) {
-            BlocProvider.of<NoteBloc>(context)
-              ..add(
-                NoteAddedEvent(
-                  NoteModel(
+      appBar: AppBar(
+        leading: IconButton(
+          onPressed: () {
+            if (titleTextController!.text.length > 0 ||
+                noteTextController!.text.length > 0) {
+              BlocProvider.of<NoteBloc>(context)
+                ..add(
+                  NoteAddedEvent(NoteModel(
                       title: titleTextController?.text,
                       note: noteTextController?.text,
                       label: '',
-                      dateCreated: dateTimeToFormatDate(DateTime.now())),
-                ),
-              );
+                      dateCreated: dateTimeToFormatDate(DateTime.now()))),
+                );
 
-            Navigator.pop(context);
-          }
-        },
-        child: Icon(Icons.save),
+              Navigator.pop(context);
+            } else {
+              Navigator.pop(context);
+            }
+          },
+          icon: Icon(Icons.arrow_back),
+        ),
       ),
+      // floatingActionButton: FloatingActionButton(
+      //   onPressed: () {},
+      //   child: Icon(Icons.save),
+      // ),
       body: Container(
         height: DS.sh,
         width: DS.sw,
         padding: EdgeInsets.symmetric(horizontal: DS.sw * 0.04),
         child: Column(
           children: [
+            Align(alignment: Alignment.centerLeft, child: DateCreated()),
             Container(
               width: double.infinity,
               child: Column(
@@ -63,7 +69,6 @@ class _AddNoteWidgetState extends State<AddNoteWidget> {
                     isTitle: true,
                     onChanged: (x) {},
                   ),
-                  DateCreated(),
                 ],
               ),
             ),
