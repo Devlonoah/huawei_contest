@@ -67,7 +67,7 @@ class Body extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.symmetric(horizontal: DS.sw * 0.04),
+      padding: EdgeInsets.symmetric(horizontal: 14),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -76,7 +76,7 @@ class Body extends StatelessWidget {
                 style: Theme.of(context)
                     .textTheme
                     .headline4
-                    ?.copyWith(fontWeight: FontWeight.bold, fontSize: 20.sp)),
+                    ?.copyWith(fontWeight: FontWeight.bold, fontSize: 20)),
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.start,
@@ -86,36 +86,35 @@ class Body extends StatelessWidget {
                 note.dateCreated.toString(),
                 style: Theme.of(context).textTheme.headline6?.copyWith(
                     fontWeight: FontWeight.w700,
-                    fontSize: 11.sp,
+                    fontSize: 11,
                     color: Colors.grey),
               ),
-              SizedBox(width: DS.sw * 0.03),
+              SizedBox(width: 10),
               Container(color: Colors.grey, width: 3.0, height: 25.0),
               Expanded(
                 child: Container(
-                  padding: EdgeInsets.symmetric(
-                      horizontal: DS.sw * 0.02, vertical: DS.sh * 0.007),
+                  padding: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
                   decoration:
                       BoxDecoration(borderRadius: BorderRadius.circular(5.0)),
                   child: Text(
                     '${note.note?.length} CHARACTERS ',
                     maxLines: 2,
                     style: Theme.of(context).textTheme.bodyText2?.copyWith(
-                          fontSize: 11.sp,
+                          fontSize: 11,
                         ),
                   ),
                 ),
               ),
             ],
           ),
-          SizedBox(height: DS.sh * 0.03),
+          SizedBox(height: 10),
           Expanded(
             child: ScaleAnimatingWidget(
               widget: Text(
                 note.note.toString(),
                 style: Theme.of(context).textTheme.headline6?.copyWith(
                     color: Theme.of(context).textTheme.headline1?.color,
-                    fontSize: 14.sp,
+                    fontSize: 14,
                     letterSpacing: -1.0),
               ),
             ),

@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.huawei_contest">
+    package="com.notty.devlonoah">
    <application
-        android:label="huawei_contest"
+        android:label="Notty"
         android:icon="@mipmap/ic_launcher">
         <activity
             android:name=".MainActivity"

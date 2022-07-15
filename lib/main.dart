@@ -42,7 +42,7 @@ class MyApp extends StatelessWidget {
         builder: (context, state) {
           return ScreenUtilInit(
             builder: () => MaterialApp(
-              title: 'Nothy',
+              title: 'Notty',
               debugShowCheckedModeBanner: false,
               theme: lightThemeData(),
               darkTheme: darkThemeData(),

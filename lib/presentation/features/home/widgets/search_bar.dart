@@ -15,25 +15,25 @@ class SearchBar extends StatelessWidget {
     return GestureDetector(
       onTap: onTap,
       child: Padding(
-        padding: EdgeInsets.symmetric(horizontal: DS.sw * 0.02),
+        padding: EdgeInsets.symmetric(horizontal: 14),
         child: Container(
             alignment: Alignment.center,
-            height: DS.sh * 0.06,
-            padding: EdgeInsets.symmetric(horizontal: DS.sw * 0.04),
+            height: 50,
+            padding: EdgeInsets.symmetric(horizontal: 14),
             decoration: BoxDecoration(
               color: Theme.of(context).primaryColor,
-              borderRadius: BorderRadius.circular(15.0.r),
+              borderRadius: BorderRadius.circular(15.0),
             ),
             child: Row(children: [
               Icon(Icons.search),
               SizedBox(
-                width: DS.sw * 0.03,
+                width: 14,
               ),
               Text('Search Note',
                   style: Theme.of(context).textTheme.headline6?.copyWith(
                       color: Colors.grey,
                       fontWeight: FontWeight.w300,
-                      fontSize: 12.sp)),
+                      fontSize: 12)),
             ])),
       ),
     );

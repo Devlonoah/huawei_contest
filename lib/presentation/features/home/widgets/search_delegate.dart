@@ -34,7 +34,7 @@ class MySearchDelegate extends SearchDelegate {
 
   @override
   TextStyle? get searchFieldStyle =>
-      Theme.of(context).textTheme.headline5?.copyWith(fontSize: 15.sp);
+      Theme.of(context).textTheme.headline5?.copyWith(fontSize: 15);
 
   @override
   String? get searchFieldLabel => 'Search note';
@@ -59,7 +59,7 @@ class MySearchDelegate extends SearchDelegate {
       return Column(
         children: [
           SizedBox(
-            height: DS.sh * 0.02,
+            height: 10,
           ),
           Text('Result'),
           Expanded(
@@ -104,7 +104,7 @@ class MySearchDelegate extends SearchDelegate {
       return Column(
         children: [
           SizedBox(
-            height: DS.sh * 0.02,
+            height: 10,
           ),
           Text('Suggestion'),
           Expanded(
@@ -122,11 +122,9 @@ class MySearchDelegate extends SearchDelegate {
                     },
                     title: Text(
                       '${currentNote.title}',
-                      style: TextStyle(fontFamily: 'Monaco'),
                     ),
                     subtitle: Text(
                       "${currentNote.note}",
-                      style: TextStyle(fontFamily: 'Monaco'),
                     ),
                   );
                 },

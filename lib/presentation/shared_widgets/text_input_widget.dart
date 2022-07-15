@@ -23,17 +23,19 @@ class TextInputWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextField(
-      scrollPhysics: NeverScrollableScrollPhysics(),
       autofocus: autoFocus,
       controller: controller,
       onChanged: onChanged,
-      maxLength: 10000,
+      keyboardType: TextInputType.multiline,
+      textInputAction: TextInputAction.newline,
+      maxLines: null,
       maxLengthEnforcement: MaxLengthEnforcement.enforced,
       cursorWidth: 3,
       cursorColor: Theme.of(context).textSelectionTheme.cursorColor,
       style: TextStyle(
         color: Theme.of(context).textTheme.headline1?.color,
-        fontSize: isTitle ? 14 : 16,
+        fontSize: isTitle ? 14 : 18,
+        letterSpacing: 0.1,
         fontWeight: FontWeight.normal,
       ),
       decoration: InputDecoration(

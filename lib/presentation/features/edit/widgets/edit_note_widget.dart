@@ -39,18 +39,6 @@ class _EditNoteWidgetState extends State<EditNoteWidget> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // floatingActionButton: FloatingActionButton(
-      //   onPressed: () {
-      //     final updatedNote = widget.note.copyWith(
-      //       title: titleTextController.text,
-      //       note: noteTextController.text,
-      //     );
-
-      //     BlocProvider.of<NoteBloc>(context)
-      //       ..add(NoteUpdatedEvent(updatedNote));
-      //     Navigator.pop(context);
-      //   },
-      //   child: Icon(Icons.save),
       // ),
       appBar: AppBar(
         leading: IconButton(
@@ -64,62 +52,53 @@ class _EditNoteWidgetState extends State<EditNoteWidget> {
                   dateCreated: dateTimeToFormatDate(DateTime.now()));
 
               BlocProvider.of<NoteBloc>(context)
-                ..add(NoteUpdatedEvent(updatedNote));
+                  .add(NoteUpdatedEvent(updatedNote));
+
               Navigator.pop(context);
             } else {
               Navigator.pop(context);
             }
-
-            // if (titleTextController!.text.length > 0 ||
-            //     noteTextController!.text.length > 0) {
-            //   BlocProvider.of<NoteBloc>(context)
-            //     ..add(
-            //       NoteAddedEvent(
-            //         NoteModel(
-            //             title: titleTextController.text,
-            //             note: noteTextController.text,
-            //             label: '',
-            //             dateCreated: dateTimeToFormatDate(DateTime.now())),
-            //       ),
-            //     );
-
-            //   Navigator.pop(context);
-            // }
           },
         ),
       ),
       body: SafeArea(
         child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: DS.sw * 0.04),
+          padding: EdgeInsets.symmetric(horizontal: 14),
           child: SingleChildScrollView(
-            child: Column(
-              children: [
-                Row(
-                  children: [
-                    Text(
-                      widget.note.dateCreated.toString(),
-                      style:
-                          TextStyle(fontSize: 12, color: Colors.grey.shade500),
+            child: SizedBox(
+              height: MediaQuery.of(context).size.height,
+              child: Column(
+                children: [
+                  Row(
+                    children: [
+                      Text(
+                        widget.note.dateCreated.toString(),
+                        style: TextStyle(
+                            fontSize: 12, color: Colors.grey.shade500),
+                      ),
+                      SizedBox(width: 10),
+                      Container(color: Colors.amber, width: 4, height: 14.0),
+                    ],
+                  ),
+                  TextInputWidget(
+                    autoFocus: true,
+                    controller: titleTextController,
+                    hint: 'Title',
+                    isTitle: true,
+                    onChanged: (x) {},
+                  ),
+                  SizedBox(height: 10),
+                  Expanded(
+                    child: TextInputWidget(
+                      autoFocus: false,
+                      controller: noteTextController,
+                      hint: 'Start typing',
+                      isTitle: false,
+                      onChanged: (x) {},
                     ),
-                    SizedBox(width: 10),
-                    Container(color: Colors.amber, width: 4, height: 14.0),
-                  ],
-                ),
-                TextInputWidget(
-                  autoFocus: true,
-                  controller: titleTextController,
-                  hint: 'Title',
-                  isTitle: true,
-                  onChanged: (x) {},
-                ),
-                TextInputWidget(
-                  autoFocus: false,
-                  controller: noteTextController,
-                  hint: 'Start typing',
-                  isTitle: false,
-                  onChanged: (x) {},
-                ),
-              ],
+                  ),
+                ],
+              ),
             ),
           ),
         ),

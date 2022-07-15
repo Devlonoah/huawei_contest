@@ -1,16 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:url_launcher/url_launcher.dart';
 import '../../../common/spacing.dart';
 import '../../../models/screen_arguments.dart';
-import '../../../core/device_size.dart';
 import '../../../models/note_model.dart';
 import '../../bloc/note_bloc/note_bloc.dart';
 import '../edit/add_edit.dart';
 import 'widgets/barrel.dart';
 
-import '../read/read.dart';
 import '../../../common/extension/ellipsis.dart';
 
 class Home extends StatefulWidget {
@@ -28,15 +26,44 @@ class _HomeState extends State<Home> {
   }
 
   GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
+
+  Future<void> _launchUrl() async {
+    if (await launchUrl(
+      Uri.parse("https://www.buymeacoffee.com/devlonoah"),
+    )) {}
+  }
+
   @override
   Widget build(BuildContext context) {
-    DS.init(context);
     return Scaffold(
       key: scaffoldKey,
       appBar: appBarAndSettingsButton(
         context,
         onPressed: () {
-          scaffoldKey.currentState!.openEndDrawer();
+          showDialog(
+              context: context,
+              builder: (context) {
+                return AlertDialog(
+                  backgroundColor: Colors.white,
+                  title: Text("Buy me a coffee"),
+                  content: Text("Support me so this app can remain ad free."),
+                  actions: [
+                    TextButton(
+                        onPressed: () {
+                          Navigator.pop(context);
+                        },
+                        child: Text("Another Time")),
+                    TextButton(
+                        onPressed: () async {
+                          if (await launchUrl(
+                              Uri.parse(
+                                  "https://www.buymeacoffee.com/devlonoah"),
+                              mode: LaunchMode.externalApplication)) {}
+                        },
+                        child: Text("Continue")),
+                  ],
+                );
+              });
         },
       ),
       // endDrawer: EndDrawerWidget(),
@@ -59,13 +86,13 @@ class HomeBody extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: EdgeInsets.only(
-        right: DS.sw * 0.02,
-        left: DS.sw * 0.02,
-        top: DS.sh * 0.01,
+        right: 14,
+        left: 14,
+        top: 0,
       ),
       child: Column(
         children: [
-          // SizedBox(height: DS.sh * 0.02),
+          //TODO: Next update
           // BlocBuilder<NoteBloc, NoteState>(
           //   builder: (context, state) {
           //     final List<NoteModel> noteState =
@@ -79,7 +106,7 @@ class HomeBody extends StatelessWidget {
           //     );
           //   },
           // ),
-          // SizedBox(height: DS.sh * 0.03),
+          SizedBox(height: 10),
           addVerticalSpace(10),
           Expanded(
             child: BlocConsumer<NoteBloc, NoteState>(
@@ -112,8 +139,9 @@ class HomeBody extends StatelessWidget {
                         NoteModel _note = state.notes[x];
 
                         return Dismissible(
-                          onDismissed: (x) => context.read<NoteBloc>()
-                            ..add(NoteDeletedEvent(_note)),
+                          onDismissed: (x) => context
+                              .read<NoteBloc>()
+                              .add(NoteDeletedEvent(_note)),
                           key: Key(_note.hashCode.toString()),
                           child: NoteWidget(
                             note: _note,

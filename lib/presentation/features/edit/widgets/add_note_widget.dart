@@ -46,46 +46,46 @@ class _AddNoteWidgetState extends State<AddNoteWidget> {
           icon: Icon(Icons.arrow_back),
         ),
       ),
-      // floatingActionButton: FloatingActionButton(
-      //   onPressed: () {},
-      //   child: Icon(Icons.save),
-      // ),
-      body: Container(
-        height: DS.sh,
-        width: DS.sw,
-        padding: EdgeInsets.symmetric(horizontal: DS.sw * 0.04),
-        child: Column(
-          children: [
-            Align(alignment: Alignment.centerLeft, child: DateCreated()),
-            Container(
-              width: double.infinity,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  TextInputWidget(
-                    autoFocus: true,
-                    controller: titleTextController,
-                    hint: 'Add Title',
-                    isTitle: true,
-                    onChanged: (x) {},
+      body: SingleChildScrollView(
+        child: SizedBox(
+          height: MediaQuery.of(context).size.height,
+          child: Container(
+            // padding: MediaQuery.of(context).viewInsets,
+            child: Column(
+              children: [
+                Align(alignment: Alignment.centerLeft, child: DateCreated()),
+                Container(
+                  width: double.infinity,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      TextInputWidget(
+                        autoFocus: true,
+                        controller: titleTextController,
+                        hint: 'Add Title',
+                        isTitle: true,
+                        onChanged: (x) {},
+                      ),
+                    ],
                   ),
-                ],
-              ),
+                ),
+                SizedBox(height: 10),
+                Expanded(
+                  child: BlocBuilder<EditBloc, EditState>(
+                    builder: (context, state) {
+                      return TextInputWidget(
+                        autoFocus: false,
+                        controller: noteTextController,
+                        isTitle: false,
+                        onChanged: (x) {},
+                        hint: 'Add Note here....',
+                      );
+                    },
+                  ),
+                ),
+              ],
             ),
-            Expanded(
-              child: BlocBuilder<EditBloc, EditState>(
-                builder: (context, state) {
-                  return TextInputWidget(
-                    autoFocus: false,
-                    controller: noteTextController,
-                    isTitle: false,
-                    onChanged: (x) {},
-                    hint: 'Add Note here....',
-                  );
-                },
-              ),
-            ),
-          ],
+          ),
         ),
       ),
     );

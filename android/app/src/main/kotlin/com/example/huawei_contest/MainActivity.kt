@@ -1,4 +1,4 @@
-package com.example.huawei_contest
+package com.notty.devlonoah
 
 import io.flutter.embedding.android.FlutterActivity
 

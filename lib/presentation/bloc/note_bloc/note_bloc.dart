@@ -47,10 +47,17 @@ class NoteBloc extends Bloc<NoteEvent, NoteState> {
   Stream<NoteState> _updateDb(NoteModel note, List<NoteModel> notes) async* {
     var result = await repository.updateNote(note);
 
+    //remove from list
+    var updatednotes = notes.removeWhere((element) => element.id == note.id);
+
+    //add as if its new note
+
+    notes.add(note);
+
     yield* result.fold((l) async* {
-      yield NoteLoadingFailure('Databasa palavar');
+      yield NoteLoadingFailure('Failed to update');
     }, (r) async* {
-      yield NoteLoadingSuccess(notes);
+      yield NoteLoadingSuccess(notes.reversed.toList());
     });
   }
 
@@ -83,30 +90,31 @@ class NoteBloc extends Bloc<NoteEvent, NoteState> {
 
           yield NoteLoadingSuccess(note);
         } else {
-          yield NoteLoadingSuccess(r);
+          yield NoteLoadingSuccess(r.reversed.toList());
         }
       },
     );
   }
 
   Stream<NoteState> _mapNoteAddedEventToState(NoteAddedEvent event) async* {
-    var oldNotes = (state as NoteLoadingSuccess).notes;
-    oldNotes.insert(0, event.note);
-    List<NoteModel> updatedNote = oldNotes;
+    final oldNotes = (state as NoteLoadingSuccess).notes;
+    final updatedNotes = oldNotes.add(event.note);
 
-    yield* _addNoteToDb(event, updatedNote);
+    yield NoteLoadingSuccess(oldNotes.reversed.toList());
+
+    _addNoteToDb(event, oldNotes);
   }
 
-  Stream<NoteState> _addNoteToDb(
-      NoteAddedEvent event, List<NoteModel> updatedNote) async* {
-    var result = await repository.addNote(event.note);
-    result.fold(
-      (l) async* {
-        yield NoteLoadingFailure(l.message);
-      },
-      (r) async* {
-        yield NoteLoadingSuccess(updatedNote);
-      },
-    );
+  Future<void> _addNoteToDb(
+      NoteAddedEvent event, List<NoteModel> updatedNote) async {
+    await repository.addNote(event.note);
+    // result.fold(
+    //   (l) async* {
+    //     yield NoteLoadingFailure(l.message);
+    //   },
+    //   (r) async* {
+    //     yield NoteLoadingSuccess(updatedNote);
+    //   },
+    // );
   }
 }

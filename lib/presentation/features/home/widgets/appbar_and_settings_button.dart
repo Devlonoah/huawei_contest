@@ -10,11 +10,14 @@ PreferredSizeWidget appBarAndSettingsButton(BuildContext context,
           .headline6
           ?.copyWith(fontWeight: FontWeight.w100),
     ),
-    // actions: [
-    //   // IconButton(
-    //   //   onPressed: onPressed,
-    //   //   icon: Icon(Icons.settings_outlined),
-    //   // ),
-    // ],
+    actions: [
+      Padding(
+        padding: const EdgeInsets.only(right: 8.0),
+        child: IconButton(
+          onPressed: onPressed,
+          icon: Icon(Icons.info_outline),
+        ),
+      ),
+    ],
   );
 }
